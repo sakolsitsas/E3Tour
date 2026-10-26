@@ -1099,7 +1099,6 @@ html {
 <body>
 <main>
       <button id="themeToggle" type="button">
-       ปรับแสง
     </button>
 
 
@@ -1387,6 +1386,243 @@ html {
   </div>
   </div>
 </section>
+
+
+<!-- SECRET ACTIVITIES / COMING SOON -->
+<section id="coming-soon" class="coming-soon-section">
+  <div class="coming-soon-header">
+    <span class="classified-tag">🔒 CLASSIFIED</span>
+    <span class="coming-soon-date">DEC 05–07, 2026</span>
+  </div>
+
+  <p class="coming-soon-eyebrow">SOMETHING IS BREWING...</p>
+  <h2>กิจกรรม</h2>
+  <p class="coming-soon-desc">
+    เล่นไม่ใหญ่ = <br>
+    ทริปนี้มีบางอย่างที่เรายังบอกไม่ได้...
+  </p>
+
+  <div class="secret-cards">
+    <button class="secret-card" type="button" onclick="showSecretHint(this)">
+      <span class="secret-icon">🎭</span>
+      <span class="secret-status">TOP SECRET · 001</span>
+      <strong>??? ?????</strong>
+      <span class="secret-subtitle">?? ??? ??? </span>
+      <span class="secret-lock">🔒 LOCKED</span>
+    </button>
+
+    <button class="secret-card" type="button" onclick="showSecretHint(this)">
+      <span class="secret-icon">🕵️</span>
+      <span class="secret-status">TOP SECRET · 002</span>
+      <strong>Hello</strong>
+      <span class="secret-subtitle">??? ?? ? ?? ? </span>
+      <span class="secret-lock">🔒 LOCKED</span>
+    </button>
+
+    <button class="secret-card" type="button" onclick="showSecretHint(this)">
+      <span class="secret-icon">🏆</span>
+      <span class="secret-status">TOP SECRET · 003</span>
+      <strong>Tesst</strong>
+      <span class="secret-subtitle">X X XXX XX Z</span>
+      <span class="secret-lock">🔒 LOCKED</span>
+    </button>
+  </div>
+
+  <div class="secret-footer">
+    <span class="secret-pulse"></span>
+    <span id="secret-message">กำลังปกปิดข้อมูลจากผู้เข้าร่วม...</span>
+  </div>
+  <p class="secret-disclaimer">รายละเอียดจะเปิดเผยเมื่อถึงเวลาเท่านั้น</p>
+</section>
+
+<style>
+.coming-soon-section {
+  position: relative;
+  overflow: hidden;
+  margin: 32px 0;
+  padding: clamp(22px, 5vw, 42px);
+  border-radius: 24px;
+  color: #f7f5ff;
+  background:
+    radial-gradient(ellipse at 10% 0%, #47316b 0%, transparent 45%),
+    radial-gradient(ellipse at 100% 100%, #203d51 0%, transparent 45%),
+    #10111a;
+  border: 1px solid rgba(190, 160, 255, .24);
+  font-family: inherit;
+}
+.coming-soon-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.classified-tag {
+  color: #e3ceff;
+  background: rgba(167, 120, 255, .15);
+  border: 1px solid rgba(190, 160, 255, .3);
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+.coming-soon-date {
+  color: #9694aa;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+.coming-soon-eyebrow {
+  margin: 30px 0 8px;
+  color: #c3a4ff;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 800;
+}
+.coming-soon-section h2 {
+  margin: 0 0 12px;
+  font-size: clamp(30px, 5vw, 44px);
+  line-height: 1.2;
+  color: #fff;
+}
+.coming-soon-desc {
+  color: #b9b7c9;
+  line-height: 1.9;
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+.secret-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.secret-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  min-width: 0;
+  padding: 20px 16px;
+  border-radius: 16px;
+  border: 1px solid #343347;
+  background: linear-gradient(145deg, #202031, #171722);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+.secret-card:hover {
+  transform: translateY(-4px);
+  border-color: #a78bfa;
+  background: linear-gradient(145deg, #2c2542, #191a29);
+}
+.secret-card:active { transform: scale(.98); }
+.secret-icon { font-size: 30px; margin-bottom: 20px; }
+.secret-status {
+  color: #b8a0ed;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  margin-bottom: 9px;
+}
+.secret-card strong {
+  font-size: 17px;
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+.secret-subtitle {
+  color: #aaa8bc;
+  font-size: 12px;
+  line-height: 1.7;
+  min-height: 42px;
+}
+.secret-lock {
+  margin-top: 18px;
+  padding: 7px 10px;
+  background: #303044;
+  color: #d0c3f6;
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.secret-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 26px;
+  color: #c1bdcf;
+  font-size: 12px;
+  text-align: center;
+}
+.secret-pulse {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: #b69aff;
+  box-shadow: 0 0 12px #a78bfa;
+  animation: secretPulse 1.5s infinite;
+}
+.secret-disclaimer {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 10px;
+  color: #77758b;
+}
+@keyframes secretPulse {
+  50% { opacity: .35; box-shadow: 0 0 3px #a78bfa; }
+}
+@media (max-width: 600px) {
+  .secret-cards { grid-template-columns: 1fr; }
+  .secret-card {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: 12px;
+    align-items: center;
+  }
+  .secret-icon {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    margin: 0;
+  }
+  .secret-status, .secret-card strong,
+  .secret-subtitle, .secret-lock { grid-column: 2; }
+  .secret-subtitle { min-height: 0; }
+  .secret-lock { justify-self: start; margin-top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .secret-pulse { animation: none; }
+  .secret-card { transition: none; }
+}
+</style>
+
+<script>
+function showSecretHint(card) {
+  const message = document.getElementById('secret-message');
+  const hints = [
+    '🔍 รู้มากไปแล้ว... แต่ยังไม่ถึงเวลาเปิดเผย!',
+    '🤫 ภารกิจนี้จะไม่ง่ายอย่างที่คิด',
+    '👀 จะกดทำไม ไม่มีอะไรร ยังไม่ได้คิดดด !'
+  ];
+  const index = Array.from(
+    card.parentElement.children
+  ).indexOf(card);
+
+  message.textContent = hints[index] || hints[0];
+
+  card.animate(
+    [
+      { transform: 'translateX(0)' },
+      { transform: 'translateX(-3px)' },
+      { transform: 'translateX(3px)' },
+      { transform: 'translateX(0)' }
+    ],
+    { duration: 220 }
+  );
+}
+</script>
+
 
 
 </main>
