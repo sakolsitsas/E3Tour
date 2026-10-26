@@ -4,67 +4,38 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f4f0e5">
-  <title>โหวตรูปกลุ่มเพื่อน</title>
+  <title>YANG MAI DAI KID SHU TRIP · ISAN</title>
   <style>
    
 :root {
   color-scheme: light;
 
-  /* ธีมอีสานร่วมสมัย: คราม ดิน ครีม */
   --ink: #34352f;
   --muted: #6b6b60;
   --line: #ded8c9;
   --bg: #f4f0e5;
   --surface: #fffdf7;
-  --input-bg: #ffffff;
   --soft: #ebe6d8;
-  --photo-placeholder: #e5dfd1;
-
   --primary: #405c59;
-  --primary-hover: #304744;
-  --primary-text: #ffffff;
-
   --vote-bg: #e2eadf;
   --vote-text: #304f3b;
   --vote-border: #b8cbb5;
-  --vote-selected: #405c59;
-
-  --error-bg: #f5e5df;
-  --error-text: #843f32;
-  --success-bg: #e1ebdd;
-  --success-text: #315b3c;
-
   --focus: #a66b36;
   --shadow: 0 3px 12px rgba(65, 54, 35, 0.06);
 }
 
 body.dark-mode {
   color-scheme: dark;
-
-  /* โหมดมืด: ถ่าน เทาหม่น ครามหม่น */
   --ink: #eeeae0;
   --muted: #c1bdb2;
   --line: #454640;
   --bg: #20211f;
   --surface: #2a2b28;
-  --input-bg: #333430;
   --soft: #383934;
-  --photo-placeholder: #383934;
-
   --primary: #718b83;
-  --primary-hover: #849b92;
-  --primary-text: #171c19;
-
   --vote-bg: #343c35;
   --vote-text: #e1e9dc;
   --vote-border: #58675a;
-  --vote-selected: #718b83;
-
-  --error-bg: #49332e;
-  --error-text: #f2c7b9;
-  --success-bg: #303e32;
-  --success-text: #d2e7d0;
-
   --focus: #d0a16e;
   --shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
 }
@@ -121,11 +92,6 @@ p {
   margin-top: 10px;
 }
 
-.muted {
-  color: var(--muted);
-  font-size: 1rem;
-}
-
 .panel {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -133,31 +99,6 @@ p {
   padding: 22px;
   margin: 16px 0;
   box-shadow: var(--shadow);
-}
-
-label {
-  display: block;
-  font-weight: 700;
-  font-size: 1.05rem;
-  margin: 18px 0 8px;
-}
-
-/* ช่องกรอกข้อมูล */
-input[type="text"],
-input[type="file"] {
-  display: block;
-  width: 100%;
-  min-height: 52px;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--input-bg);
-  color: var(--ink);
-  font: inherit;
-}
-
-input[type="file"] {
-  min-height: 60px;
 }
 
 /* ปุ่มทั้งหมด: ขนาดใหญ่ กดง่าย */
@@ -185,47 +126,9 @@ button:disabled {
   cursor: not-allowed;
 }
 
-button:focus-visible,
-input:focus-visible {
+button:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
-}
-
-.theme-toggle {
-  background: var(--soft);
-  color: var(--ink);
-  border: 1px solid var(--line);
-  white-space: nowrap;
-}
-
-.primary {
-  display: block;
-  width: 100%;
-  min-height: 54px;
-  margin-top: 18px;
-  background: var(--primary);
-  color: var(--primary-text);
-  border: none;
-}
-
-.primary:hover:not(:disabled) {
-  background: var(--primary-hover);
-}
-
-.vote {
-  display: block;
-  width: 100%;
-  min-height: 52px;
-  background: var(--vote-bg);
-  color: var(--vote-text);
-  border: 1px solid var(--vote-border);
-  margin-top: 10px;
-}
-
-.vote.selected {
-  background: var(--vote-selected);
-  color: var(--primary-text);
-  border-color: var(--vote-selected);
 }
 
 /* แถบหัวเว็บและสถานะ */
@@ -235,88 +138,6 @@ input:focus-visible {
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: var(--soft);
-  color: var(--ink);
-  font-size: 0.95rem;
-  font-weight: 650;
-}
-
-/* แกลเลอรี */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 16px;
-}
-
-.photo {
-  min-width: 0;
-  padding: 10px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-}
-
-.photo img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 10px;
-  background: var(--photo-placeholder);
-}
-
-.photo .name {
-  font-size: 1.05rem;
-  font-weight: 750;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-  margin: 12px 2px 4px;
-}
-
-.photo .score {
-  color: var(--muted);
-  font-size: 1rem;
-  margin: 4px 2px 8px;
-}
-
-/* ข้อความแจ้งผล */
-.status {
-  margin-top: 14px;
-  padding: 14px;
-  border-radius: 12px;
-  background: var(--soft);
-  color: var(--ink);
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  font-size: 1rem;
-}
-
-.status.error {
-  background: var(--error-bg);
-  color: var(--error-text);
-}
-
-.status.ok {
-  background: var(--success-bg);
-  color: var(--success-text);
-}
-
-footer {
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.7;
-  margin-top: 24px;
-  padding: 0 4px;
 }
 
 [hidden] {
@@ -339,25 +160,8 @@ footer {
     border-radius: 14px;
   }
 
-  .grid {
-    gap: 8px;
-  }
-
-  .photo {
-    padding: 7px;
-    border-radius: 12px;
-  }
-
-  .photo .name {
-    font-size: 0.98rem;
-  }
-
   .topline {
     gap: 10px;
-  }
-
-  .theme-toggle {
-    padding: 10px 12px;
   }
 }
 
@@ -367,17 +171,6 @@ footer {
     padding: 28px 22px 48px;
   }
 
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-  }
-}
-
-/* คอมพิวเตอร์ */
-@media (min-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 }
 
 /* ลดแอนิเมชันสำหรับผู้ที่ตั้งค่าลดการเคลื่อนไหว */
@@ -389,238 +182,1216 @@ footer {
     transition: none !important;
   }
 }
-.topline {
+
+
+
+.schedule-list {
+  display: grid;
+  gap: 16px;
+}
+
+.schedule-day {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.day-label {
+  align-self: start;
+  text-align: center;
+  padding: 9px 5px;
+  border-radius: 10px;
+  background: var(--vote-bg);
+  color: var(--vote-text);
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.day-content h3 {
+  margin: 2px 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.day-content p {
+  margin: 10px 0;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.schedule-time {
+  display: inline-block;
+  min-width: 55px;
+  margin-right: 6px;
+  font-weight: 700;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+  .schedule-day {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .day-label {
+    justify-self: start;
+    min-width: 72px;
+  }
+
+  .day-content h3 {
+    font-size: 17px;
+  }
+}
+
+
+#itineraryPanel .topline {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+#itineraryPanel .topline h2 {
+  margin: 0;
+  line-height: 1.5;
+}
+
+#itineraryToggle {
+  flex-shrink: 0;
+  min-width: 88px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--soft);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#itineraryToggle:hover {
+  background: var(--vote-bg);
+}
+
+#itineraryToggle:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  #itineraryPanel .topline {
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  #itineraryPanel .topline h2 {
+    font-size: 19px;
+  }
+
+  #itineraryToggle {
+    min-width: 80px;
+    padding: 10px;
+  }
+}
+
+.countdown-panel {
+  padding: 30px 18px;
+  margin: 24px 0;
+  text-align: center;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.countdown-label {
+  margin: 0 0 8px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.countdown-panel h2 {
+  margin: 0 0 24px;
+  font-size: clamp(23px, 5vw, 34px);
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.countdown-item {
+  padding: 18px 4px;
+  border-radius: 16px;
+  background: var(--vote-bg);
+  border: 1px solid var(--vote-border);
+}
+
+.countdown-item span {
+  display: block;
+  color: var(--vote-text);
+  font-size: clamp(30px, 7vw, 58px);
+  line-height: 1.2;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-item small {
+  display: block;
+  margin-top: 8px;
+  color: var(--vote-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#countdownMessage {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+@media (max-width: 380px) {
+  .countdown-grid {
+    gap: 6px;
+  }
+
+  .countdown-item {
+    padding: 14px 2px;
+  }
+
+  .countdown-item small {
+    font-size: 12px;
+  }
+}
+#themeToggle {
+  display: block;
+  margin: 12px 12px 20px auto;
+}
+
+
+.trip-header {
+  padding: 32px 20px;
+  margin-bottom: 24px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.trip-header-content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.trip-eyebrow {
+  margin: 0 0 12px;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.trip-header h1 {
+  margin: 0 0 10px;
+  color: var(--primary);
+  font-size: clamp(26px, 5vw, 36px);
+  line-height: 1.35;
+}
+
+.trip-header h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(18px, 3.5vw, 23px);
+  line-height: 1.6;
+}
+
+.trip-location {
+  margin: 6px 0 20px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.trip-date {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 18px;
+  background: var(--vote-bg);
+  color: var(--vote-text);
+  border: 1px solid var(--vote-border);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.trip-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 24px 0;
+}
+
+.trip-person {
+  margin-top: 18px;
+}
+
+.trip-role {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: var(--soft);
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.trip-person p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+@media (max-width: 480px) {
+  .trip-header {
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+
+  .trip-date {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 8px;
+    font-size: 14px;
+  }
+
+  .trip-person p {
+    font-size: 14px;
+  }
+}
+
+
+.tour-slideshow {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  margin: 16px 0 24px;
+  background: #222;
+  isolation: isolate;
+  aspect-ratio: 16 / 9;
+}
+
+.tour-slides {
+  position: absolute;
+  inset: 0;
+}
+
+.tour-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
+}
+
+.tour-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.tour-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  transform: scale(1);
+  transition: transform 6s ease;
+}
+
+.tour-slide.active img {
+  transform: scale(1.06);
+}
+
+
+.tour-dots {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+
+  padding: 18px 12px 14px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 0, 0, 0.35)
+  );
+}
+
+.tour-dot {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  padding: 0;
+  margin: 0;
+
+  border: none;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.55);
+
+  cursor: pointer;
+  transition:
+    width 0.3s ease,
+    background-color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.tour-dot.active {
+  width: 20px;
+  min-width: 20px;
+  background: #fff;
+}
+
+.tour-dot:hover {
+  background: #fff;
+}
+
+.tour-dot:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+
+.trip-author {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.author-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 12px;
 }
+
+.author-toggle {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.author-toggle:hover {
+  background: var(--soft);
+}
+
+#authorContent {
+  margin-top: 12px;
+  line-height: 1.8;
+}
+
+.author-name {
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+
+.author-phone {
+  display: inline-block;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.author-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.author-card {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  min-width: 0;
+}
+
+.author-card .author-name {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.author-card .author-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.author-card .author-phone:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .author-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+#messageBoard {
+  overflow: hidden;
+}
+
+.message-board-heading {
+  margin-bottom: 20px;
+}
+
+.message-eyebrow {
+  margin: 0 0 6px;
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.message-board-heading h2 {
+  margin: 0 0 8px;
+}
+
+.message-subtitle {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.message-form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--soft);
+}
+
+.message-form label {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.message-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+}
+
+.message-form textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.6;
+}
+
+.message-form textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.message-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.message-form-footer small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.message-submit {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.message-submit:hover {
+  filter: brightness(0.95);
+}
+
+.message-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 22px 0 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.message-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+.sticky-note {
+  --note-color: #fff4b8;
+
+  position: relative;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 22px 16px 14px;
+  background: var(--note-color);
+  color: #343434;
+  border-radius: 2px 2px 5px 5px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.10);
+  transform: rotate(-0.6deg);
+  overflow-wrap: anywhere;
+}
+
+.sticky-note:nth-child(even) {
+  transform: rotate(0.7deg);
+}
+
+.sticky-note:nth-child(4n + 2) {
+  --note-color: #dff4e4;
+}
+
+.sticky-note:nth-child(4n + 3) {
+  --note-color: #e3edff;
+}
+
+.sticky-note:nth-child(4n + 4) {
+  --note-color: #ffe3eb;
+}
+
+.sticky-tape {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 54px;
+  height: 13px;
+  background: rgba(255, 255, 255, 0.55);
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+.sticky-name {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sticky-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.sticky-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.18);
+}
+
+.sticky-date {
+  font-size: 11px;
+  color: #666;
+}
+
+.heart-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 9px;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  color: #555;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.heart-button.liked {
+  background: #ffe0e7;
+  color: #c62850;
+}
+
+.heart-button:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
+.message-empty {
+  grid-column: 1 / -1;
+  padding: 30px 12px;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 520px) {
+  .message-list {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .sticky-note,
+  .sticky-note:nth-child(even) {
+    transform: rotate(0deg);
+  }
+
+  .message-form {
+    padding: 13px;
+  }
+}
+
+.top-liked-section {
+  margin: 24px 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+.top-liked-section h2 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 1.25rem;
+}
+
+.top-liked-subtitle {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.top-liked-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.top-liked-card {
+  padding: 16px;
+  border-radius: 12px;
+  color: #333;
+  overflow-wrap: anywhere;
+}
+
+.top-liked-rank {
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.top-liked-message {
+  margin: 0 0 12px;
+  white-space: pre-wrap;
+}
+
+.top-liked-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.top-liked-empty {
+  color: var(--muted);
+  margin: 0;
+}
+
+@media (min-width: 600px) {
+  .top-liked-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+.wish-banner {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 28px 0;
+  padding: clamp(28px, 5vw, 52px);
+  border-radius: 24px;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #176b55 0%, #239477 55%, #72b99a 100%);
+  box-shadow: 0 12px 30px rgba(23, 107, 85, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  scroll-margin-top: 24px;
+}
+
+.wish-banner:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(23, 107, 85, 0.25);
+}
+
+.wish-banner:focus-visible {
+  outline: 3px solid #e8b95e;
+  outline-offset: 4px;
+}
+
+.wish-banner-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.wish-banner-label {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.wish-banner h2 {
+  margin: 0 0 18px;
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.wish-banner p {
+  max-width: 560px;
+  margin: 0 0 26px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.9;
+}
+
+.wish-banner-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: #fff;
+  color: #176b55;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.wish-banner-cta span {
+  font-size: 1.25rem;
+  transition: transform 0.25s ease;
+}
+
+.wish-banner:hover .wish-banner-cta span {
+  transform: translateY(4px);
+}
+
+.wish-banner-decoration {
+  position: absolute;
+  right: 5%;
+  top: 8%;
+  color: rgba(255, 255, 255, 0.13);
+  font-size: clamp(100px, 20vw, 240px);
+  line-height: 1;
+  pointer-events: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 600px) {
+  .wish-banner {
+    padding: 28px 22px;
+    border-radius: 18px;
+  }
+
+  .wish-banner-decoration {
+    right: -8%;
+    top: 4%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .wish-banner,
+  .wish-banner-cta span {
+    transition: none;
+  }
+}
+
 
   </style>
 </head>
 <body>
 <main>
-  <header>
-  <div class="topline">
-    <h1>Isan Tour Is Coming ....!</h1>
-
-    <button id="themeToggle" type="button">
+      <button id="themeToggle" type="button">
        ปรับแสง
     </button>
+
+
+<a href="#messageBoard" class="wish-banner">
+  <div class="wish-banner-content">
+    <h2>อยากเห็นอะไร<br>ในทริปนี้ บอกเราได้เลย!</h2>
+    <p>
+       อยากลองทำกิจกรรมอะไรเป็นพิเศษ หรือมีอะไรที่ไม่อยากทำในทริปนี้ไหม? บอกเราได้เลย แล้วมาร่วมกันทำให้ทริปครั้งนี้เป็นประสบการณ์ที่สนุกและน่าจดจำไปด้วยกัน!
+    </p>
+    <span class="wish-banner-cta">
+      บอกให้เรารู้เลย <span aria-hidden="true">↓</span>
+    </span>
+  </div>
+  <span class="wish-banner-decoration" aria-hidden="true">✦</span>
+</a>
+
+<header class="trip-header">
+  <div class="trip-header-content">
+
+    <p class="trip-eyebrow">YANG MAI DAI KID SHU TRIP · ISAN</p>
+
+    <h1>
+      ทัศนศึกษาครั้งที่ 4
+    </h1>
+
+    <h2>
+      เส้นทางภาคตะวันออกเฉียงเหนือ เส้นทางที่ 3
+    </h2>
+
+    <p class="trip-location">
+      จังหวัดนครราชสีมา และบุรีรัมย์
+    </p>
+
+    <div class="trip-date">
+      วันเสาร์ที่ 5 – วันจันทร์ที่ 7 ธันวาคม 2569
+    </div>
+
+    <div class="trip-divider"></div>
+
+    <div class="trip-person">
+      <span class="trip-role">วิทยากร</span>
+      <p>
+        รองศาสตราจารย์ ดร.สฤษดิ์พงศ์ ขุนทรง<br>
+        ศาสตราจารย์ ดร.สันติ ภัยหลบลี้<br>
+        อาจารย์ ดร.อนุรักษ์ ดีพิมาย
+      </p>
+    </div>
+
+    <div class="trip-person">
+      <span class="trip-role">มัคคุเทศก์ต้นแบบ</span>
+      <p>นายอนันต์ เสนาะโสตร</p>
+    </div>
+
+    <div class="trip-person trip-author">
+      <div class="author-heading">
+        <span class="trip-role">มัคคุเทศก์ประจำทริป</span>
+        <button
+          type="button"
+          class="author-toggle"
+          id="authorToggle"
+          aria-expanded="false"
+          aria-controls="authorContent"
+        >
+          ดูข้อมูล ▼
+        </button>
+      </div>
+      <div id="authorContent" class="author-list" hidden>
+        <div class="author-card">
+          <p class="author-name">น้องฉอ</p>
+          <a class="author-phone" href="tel:0818690608">
+            <span>📞</span> 081-869-0608
+          </a>
+        </div>
+
+        <div class="author-card">
+          <p class="author-name">น้องกลอฟ</p>
+          <a class="author-phone" href="tel:0943375737">
+            <span>📞</span> 094-337-5737
+          </a>
+        </div>
+
+        <div class="author-card">
+          <p class="author-name">น้องนุ๊ก</p>
+          <a class="author-phone" href="tel:0866172345">
+            <span>📞</span> 086-617-2345
+          </a>
+        </div>
+
+        <div class="author-card">
+          <p class="author-name">น้องมะปราง</p>
+          <a class="author-phone" href="tel:0824832544">
+            <span>📞</span> 082-483-2544
+          </a>
+        </div>
+
+        <div class="author-card">
+          <p class="author-name">น้องซาร่า</p>
+          <a class="author-phone" href="tel:0946101680">
+            <span>📞</span> 094-610-1680
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </header>
 
-  <section class="panel" id="uploadPanel" hidden >
-    <h2>ส่งรูปเข้าร่วม</h2>
-    <form id="uploadForm">
-      <label for="nickname">ชื่อเล่น</label>
-      <input id="nickname" type="text" maxlength="40" placeholder="เช่น กลอฟ สุดหล่อ" required>
-      <label for="photoFile">เลือกรูป </label>
-      <input id="photoFile" type="file" accept="image/jpeg,image/png,image/webp" required>
-      <button class="primary" id="uploadBtn" type="submit">อัปโหลดรูป</button>
-    </form>
-    <div id="uploadStatus" class="status" hidden></div>
-  </section>
 
-  <section class="panel" hidden >
-    <div class="topline">
-      <h2>รูปทั้งหมด</h2>
-      <span id="photoCount" class="pill">0 รูป</span>
+<section class="countdown-panel">
+  <p class="countdown-label"> ISAN TOUR IS COMING</p>
+  <h2>เตรียมตัวออกเดินทาง!</h2>
+
+  <div class="countdown-grid">
+    <div class="countdown-item">
+      <span id="cdDays">00</span>
+      <small>วัน</small>
     </div>
-    <p id="voteHint" class="muted">กำลังโหลดรูป…</p>
-    <div id="gallery" class="grid"></div>
-    <div id="galleryStatus" class="status" hidden></div>
-  </section>
+    <div class="countdown-item">
+      <span id="cdHours">00</span>
+      <small>ชั่วโมง</small>
+    </div>
+    <div class="countdown-item">
+      <span id="cdMinutes">00</span>
+      <small>นาที</small>
+    </div>
+    <div class="countdown-item">
+      <span id="cdSeconds">00</span>
+      <small>วินาที</small>
+    </div>
+  </div>
 
-  <section class="panel" id="resultsPanel" hidden>
-    <h2>คะแนน</h2>
-    <p class="muted">คะแนนจะอัปเดตเมื่อโหลดหน้าเว็บใหม่หรือกดปุ่มรีเฟรช</p>
-    <button id="refreshBtn" type="button">รีเฟรชรูปและคะแนน</button>
-  </section>
-  <footer>หมายเหตุ: เนื่องจากหลายๆกลุ่มเล่นใหญ่กันไว้เยอะ.. </footer>
+  <p id="countdownMessage">นับถอยหลังสู่การผจญภัยครั้งใหม่</p>
+</section>
+
+
+<section class="top-liked-section">
+  <h2>โพสต์ยอดนิยม</h2>
+  <p class="top-liked-subtitle">3 ข้อความที่ได้รับหัวใจมากที่สุด</p>
+  <div id="topLikedList" class="top-liked-list"></div>
+</section>
+
+<section class="panel" id="messageBoard">
+  <div class="message-board-heading">
+    <div>
+      <p class="message-eyebrow">OUR LITTLE MEMORY BOARD</p>
+      <h2>กระดานฝากข้อความ</h2>
+      <p class="message-subtitle">
+        อยากเห็นอะไรในทริปนี้? ฝากข้อความไว้ที่นี่ได้เลย!
+      </p>
+    </div>
+  </div>
+
+  <form id="messageForm" class="message-form">
+
+    <label for="messageText">ข้อความที่อยากฝาก</label>
+    <textarea
+      id="messageText"
+      maxlength="300"
+      rows="3"
+      placeholder="คุณอยากได้อะไรจากฉัน... หรืออยากให้ฉันทำอะไรให้คุณบ้าง? ฝากข้อความของคุณไว้ที่นี่เลย!"
+      required
+    ></textarea>
+
+    <div class="message-form-footer">
+      <button type="submit" class="message-submit">
+        📌 แปะข้อความ
+      </button>
+    </div>
+  </form>
+
+  <div class="message-toolbar">
+    <span id="messageCount">0 ข้อความ</span>
+  </div>
+  <div id="messageList" class="message-list">
+    <p class="message-empty">
+      🌷 ยังไม่มีข้อความ มาเป็นคนแรกกันเลย!
+    </p>
+  </div>
+</section>
+
+
+
+  <section class="panel" id="itineraryPanel">
+  <div class="topline">
+    <h2> กำหนดการเดินทาง</h2>
+        <button
+      type="button"
+      id="itineraryToggle"
+      aria-expanded="true"
+      aria-controls="itineraryContent"
+    >
+      ย่อ ▲
+    </button>
+  </div>
+
+  <div id="itineraryContent">
+  <div class="schedule-list">
+
+<div class="tour-slideshow" id="tourSlideshow">
+  <div class="tour-slides">
+    <div class="tour-slide active">
+      <img
+        src="https://cms.dmpcdn.com/travel/2020/07/12/144261c0-c3f5-11ea-8513-fb8d321e2c29_original.jpg"
+        alt="โบราณสถานภาคอีสาน"
+      >
+    </div>
+
+    <div class="tour-slide">
+      <img
+        src="https://images.openai.com/static-rsc-4/mTV0u_FOqsF39gIyGDvSVTpcmIH0oU3inq95u9mMD946n6WV4EXbzaFWU5IN6E7SPyo20t4PWv_abvLmhmqmAnoN9oNGWUmT3xD8obZGVZgkOqg3D51w15KMxScq8K4cRoJn9XqH4AEJ-coNPPWCVs0MRqKMXWttcB0MbIW_h6BTW3sOlITU9uwwBIxHGcsz?purpose=fullsize"
+        alt="สถาปัตยกรรมโบราณ"
+        loading="lazy"
+      >
+    </div>
+
+    <div class="tour-slide">
+      <img
+        src="https://media-cdn.tripadvisor.com/media/photo-s/1b/79/b4/ba/caption.jpg"
+        alt="บรรยากาศการท่องเที่ยว"
+        loading="lazy"
+      >
+    </div>
+
+    <div class="tour-slide">
+      <img
+        src="https://www.matichon.co.th/wp-content/uploads/2024/02/image1-11.jpg"
+        alt="วัฒนธรรมภาคอีสาน"
+        loading="lazy"
+      >
+    </div>
+  </div>
+
+  <div class="tour-dots">
+    <button class="tour-dot active" aria-label="รูปที่ 1"></button>
+    <button class="tour-dot" aria-label="รูปที่ 2"></button>
+    <button class="tour-dot" aria-label="รูปที่ 3"></button>
+    <button class="tour-dot" aria-label="รูปที่ 4"></button>
+  </div>
+</div>
+
+
+    <article class="schedule-day">
+      <div class="day-label">DAY 1</div>
+      <div class="day-content">
+        <h3>วันเสาร์ที่ 5 ธันวาคม 2569 | กรุงเทพฯ —> นครราชสีมา</h3>
+        <p><span class="schedule-time">06:00</span> ออกเดินทางจากมหาวิทยาลัยศิลปากร วังท่าพระ (รับประทานอาหารเช้าระหว่างทาง ตามอัธยาศัย) </p>
+        <p><span class="schedule-time">11:00</span> เยือนวัดพระนอนธรรมจักรเสมาราม สัมผัสมรดกอารยธรรมโบราณแห่งเมืองเสมา</p>
+        <p><span class="schedule-time">12:00</span> รัปประทานอาหารกลางวันร่วมกัน</p>
+        <p><span class="schedule-time">14:00</span> สำรวจโลกบรรพกาล ณ พิพิธภัณฑ์ไม้กลายเป็นหิน โคราชจีโอพาร์ค </p>
+        <p><span class="schedule-time">15:30</span> สัมผัสภูมิปัญญาท้องถิ่น เยือนชุมชนเครื่องปั้นดินเผาด่านเกวียน หรือแหล่งผลิตเกลือบ้านพันดุง</p>
+        <p><span class="schedule-time">17:00</span> สักการะท้าวสุรนารี ชมประตูชุมพล แลนด์มาร์กสำคัญคู่เมืองโคราช</p>
+        <p><span class="schedule-time">19:00</span> เข้าที่พัก และรับประทานอาหารเย็น ตามอัธยาศัย</p>
+      </div>
+    </article>
+
+
+    <article class="schedule-day">
+      <div class="day-label">DAY 2</div>
+      <div class="day-content">
+        <h3>วันอาทิตย์ที่ 6 ธันวาคม 2569 | นครราชสีมา <—> บุรีรัมย์  </h3>
+        <p><span class="schedule-time">07:00</span> รับประทานอาหารเช้า</p>
+        <p><span class="schedule-time">08:00</span> ออกเดินทางจากโรงแรมที่พัก มุ่งหน้าสู่จังหวัดบุรีรัมย์</p>
+        <p><span class="schedule-time">10:00</span> เยือนปราสาทพนมรุ้ง ชมความยิ่งใหญ่ของศาสนสถานเขมรโบราณบนภูเขาไฟที่ดับสนิท</p>
+        <p><span class="schedule-time">12:00</span> รับประทานอาหารกลางวันร่วมกัน</p>
+        <p><span class="schedule-time">13:30</span> สำรวจปราสาทเมืองต่ำ บารายเมืองต่ำ และกุฏิฤาษี บ้านโคกเมือง เรียนรู้มรดกทางสถาปัตยกรรมและความเชื่อโบราณ</p>
+        <p><span class="schedule-time">16:00</span> ออกเดินทางสู่เมืองพิมาย ดินแดนแห่งอารยธรรมขอมอันรุ่งเรือง</p>
+        <p><span class="schedule-time">19:00</span> เข้าที่พัก และรับประทานอาหารเย็น ตามอัธยาศัย</p>
+      </div>
+    </article>
+
+
+    <article class="schedule-day">
+      <div class="day-label">DAY 3</div>
+      <div class="day-content">
+        <h3>วันจันทร์ที่ 7 ธันวาคม 2569 | นครราชสีมา —> กรุงเทพฯ  </h3>
+        <p><span class="schedule-time">07:00</span> รับประทานอาหารเช้า</p>
+        <p><span class="schedule-time">08:00</span> ออกเดินทางจากโรงแรมที่พัก</p>
+        <p><span class="schedule-time">09:00</span> เยือนปราสาทพิมาย ชื่นชมความยิ่งใหญ่ของสถาปัตยกรรมขอมโบราณ หนึ่งในมรดกสำคัญของโคราช</p>
+        <p><span class="schedule-time">12:00</span> รับประทานอาหารกลางวันร่วมกัน</p>
+        <p><span class="schedule-time">14:30</span> ชมภาพเขียนสีเขาจันทร์งาม เรียนรู้ร่องรอยมนุษย์ยุคก่อนประวัติศาสตร์ พร้อมสัมผัสภูมิปัญญาและวิถีชุมชนเขาจันทร์งาม</p>
+        <p><span class="schedule-time">16:00</span>  ออกเดินทางกลับกรุงเทพฯ พร้อมเก็บเกี่ยวความประทับใจตลอดเส้นทาง</p>
+        <p><span class="schedule-time">19:00</span> เดินทางถึงมหาวิทยาลัยศิลปากร วังท่าพระ (รับประทานอาหารเย็นระหว่างทาง ตามอัธยาศัย)</p>
+      </div>
+    </article>
+  </div>
+  </div>
+</section>
+
+
 </main>
 
 <script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-  // 1) ใส่ค่า Project URL และ anon/public key จาก Supabase Settings > API
-  const SUPABASE_URL = 'https://bgffexsebmemwpxuztcz.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_6R6HqULLH-0uRAeyPOHHhg_iuDUq_WD';
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  const $ = (id) => document.getElementById(id);
-  let contest = null;
-  let photos = [];
-  const tokenKey = () => `photo-vote-token-${contest?.id || 'none'}`;
-  function getVoterToken() {
-    let token = localStorage.getItem(tokenKey());
-    if (!token) {
-      token = crypto.randomUUID();
-      localStorage.setItem(tokenKey(), token);
-    }
-    return token;
-  }
-  function setStatus(id, message, kind = '') {
-    const el = $(id);
-    el.hidden = !message;
-    el.textContent = message;
-    el.className = `status ${kind}`;
-  }
-  function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-
-  async function init() {
-    if (SUPABASE_URL.includes('ใส่_') || SUPABASE_ANON_KEY.includes('ใส่_')) {
-      $('roundStatus').textContent = 'ยังไม่ได้ตั้งค่า';
-      setStatus('galleryStatus', 'ก่อนใช้งาน ให้ใส่ SUPABASE_URL และ SUPABASE_ANON_KEY ในไฟล์ index.html แล้วทำตาม README', 'error');
-      $('voteHint').textContent = 'ยังไม่ได้เชื่อมต่อ Supabase';
-      return;
-    }
-    try {
-      const { data, error } = await supabase.from('contests')
-        .select('id,title,status,upload_open,voting_open')
-        .eq('is_current', true).limit(1).maybeSingle();
-      if (error) throw error;
-      if (!data) throw new Error('ยังไม่มีกิจกรรม กรุณารัน SQL ใน README ก่อน');
-      contest = data;
-      document.title = data.title;
-      $('roundStatus').textContent = data.status === 'finished' ? 'ปิดกิจกรรมแล้ว' : (data.voting_open ? 'เปิดโหวต' : 'ยังไม่เปิดโหวต');
-      document.querySelector('header h1').textContent = '📸 ' + data.title;
-      $('uploadPanel').hidden = !data.upload_open;
-      $('voteHint').textContent = data.voting_open ? 'เลือกได้ 1 รูป เมื่อโหวตแล้วจะเปลี่ยนโหวตไม่ได้ในเบราว์เซอร์เดิม' : 'ขณะนี้ยังไม่เปิดโหวต';
-      await loadPhotos();
-    } catch (err) {
-      $('roundStatus').textContent = 'มีปัญหา';
-      setStatus('galleryStatus', 'โหลดกิจกรรมไม่สำเร็จ: ' + err.message, 'error');
-      $('voteHint').textContent = 'ตรวจสอบการตั้งค่า Supabase และ SQL';
-    }
-  }
-
-  async function loadPhotos() {
-    if (!contest) return;
-    setStatus('galleryStatus', '');
-    const [{ data: photoData, error: photoError }, { data: voteData, error: voteError }] = await Promise.all([
-      supabase.from('photos').select('id,nickname,storage_path,created_at').eq('contest_id', contest.id).order('created_at', { ascending: false }),
-      supabase.from('votes').select('photo_id').eq('contest_id', contest.id)
-    ]);
-    if (photoError) throw photoError;
-    if (voteError) throw voteError;
-    const counts = {};
-    for (const vote of (voteData || [])) counts[vote.photo_id] = (counts[vote.photo_id] || 0) + 1;
-    photos = (photoData || []).map(p => {
-      const { data } = supabase.storage.from('contest-photos').getPublicUrl(p.storage_path);
-      return { ...p, imageUrl: data.publicUrl, score: counts[p.id] || 0 };
-    });
-    $('photoCount').textContent = `${photos.length} รูป`;
-    const votedPhotoId = localStorage.getItem(`photo-vote-choice-${contest.id}`);
-    $('gallery').innerHTML = '';
-    if (!photos.length) {
-      $('gallery').innerHTML = '<p class="muted">ยังไม่มีรูป ลองส่งรูปแรกของกลุ่มดูเลย!</p>';
-      return;
-    }
-    for (const photo of photos) {
-      const card = document.createElement('article');
-      card.className = 'photo';
-      const img = document.createElement('img');
-      img.src = photo.imageUrl;
-      img.alt = 'รูปของ ' + photo.nickname;
-      img.loading = 'lazy';
-      const name = document.createElement('div');
-      name.className = 'name';
-      name.textContent = photo.nickname;
-      const score = document.createElement('p');
-      score.className = 'score';
-      score.textContent = `${photo.score} คะแนน`;
-      const btn = document.createElement('button');
-      btn.className = 'vote' + (votedPhotoId === photo.id ? ' selected' : '');
-      btn.textContent = votedPhotoId === photo.id ? '✓ คุณเลือกภาพนี้แล้ว' : 'โหวตรูปนี้';
-      btn.disabled = !contest.voting_open || Boolean(votedPhotoId);
-      btn.addEventListener('click', () => voteFor(photo.id));
-      card.append(img, name, score, btn);
-      $('gallery').append(card);
-    }
-  }
-
-  async function voteFor(photoId) {
-    if (!contest?.voting_open) return;
-    if (localStorage.getItem(`photo-vote-choice-${contest.id}`)) {
-      alert('เบราว์เซอร์นี้ลงคะแนนไปแล้วในรอบนี้');
-      return;
-    }
-    const buttons = [...document.querySelectorAll('.vote')];
-    buttons.forEach(b => b.disabled = true);
-    try {
-      const { error } = await supabase.from('votes').insert({
-        contest_id: contest.id,
-        photo_id: photoId,
-        voter_token: getVoterToken()
-      });
-      if (error) {
-        if (error.code === '23505') throw new Error('เบราว์เซอร์นี้ลงคะแนนไปแล้ว');
-        throw error;
-      }
-      localStorage.setItem(`photo-vote-choice-${contest.id}`, photoId);
-      setStatus('galleryStatus', 'โหวตเรียบร้อยแล้ว ขอบคุณครับ!', 'ok');
-      await loadPhotos();
-    } catch (err) {
-      setStatus('galleryStatus', 'โหวตไม่สำเร็จ: ' + err.message, 'error');
-      buttons.forEach(b => b.disabled = false);
-    }
-  }
-
-  $('uploadForm').addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (!contest?.upload_open) return;
-    const nickname = $('nickname').value.trim();
-    const file = $('photoFile').files[0];
-    if (!nickname || !file) return;
-    if (file.size > 20 * 1024 * 1024) {
-      setStatus('uploadStatus', 'ไฟล์ใหญ่เกิน 20 MB กรุณาเลือกรูปที่เล็กกว่านี้', 'error');
-      return;
-    }
-    if (![
-    'image/jpeg',
-    'image/png',
-    'image/webp',
-    'image/heic',
-    'image/heif'
-    ].includes(file.type)) {
-      setStatus('uploadStatus', 'รองรับเฉพาะ JPG, PNG, WebP และ HEIC/HEIF', 'error');
-      return;
-    }
-    const btn = $('uploadBtn');
-    btn.disabled = true;
-    btn.textContent = 'กำลังอัปโหลด…';
-    setStatus('uploadStatus', '');
-    try {
-      const ext = ({'image/jpeg':'jpg','image/png':'png','image/webp':'webp'})[file.type];
-      const path = `${contest.id}/${crypto.randomUUID()}.${ext}`;
-      const { error: storageError } = await supabase.storage.from('contest-photos').upload(path, file, {
-        contentType: file.type, upsert: false
-      });
-      if (storageError) throw storageError;
-      const { error: insertError } = await supabase.from('photos').insert({
-        contest_id: contest.id, nickname, storage_path: path
-      });
-      if (insertError) {
-        await supabase.storage.from('contest-photos').remove([path]);
-        throw insertError;
-      }
-      $('uploadForm').reset();
-      setStatus('uploadStatus', 'ส่งรูปเรียบร้อยแล้ว!', 'ok');
-      await loadPhotos();
-    } catch (err) {
-      setStatus('uploadStatus', 'อัปโหลดไม่สำเร็จ: ' + err.message, 'error');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'อัปโหลดรูป';
-    }
-  });
-
-  $('refreshBtn').addEventListener('click', () => loadPhotos().catch(err => setStatus('galleryStatus', err.message, 'error')));
-  init();
-
   const themeToggle = document.getElementById('themeToggle');
 
   function updateThemeButton() {
@@ -628,7 +1399,7 @@ footer {
 
     themeToggle.textContent = isDark
       ? ' มืดมองไม่เห็น'
-      : ' แสบตาไม่ไหว' ; 
+      : ' แสบตาไม่ไหว';
   }
 
   // โหลดค่าที่บันทึกไว้
@@ -647,6 +1418,388 @@ footer {
 
     updateThemeButton();
   });
+
+
+const itineraryToggle = document.getElementById('itineraryToggle');
+const itineraryContent = document.getElementById('itineraryContent');
+
+if (itineraryToggle && itineraryContent) {
+  itineraryToggle.addEventListener('click', () => {
+    const isExpanded =
+      itineraryToggle.getAttribute('aria-expanded') === 'true';
+
+    itineraryToggle.setAttribute('aria-expanded', String(!isExpanded));
+    itineraryContent.hidden = isExpanded;
+    itineraryToggle.textContent = isExpanded ? 'ขยาย ▼' : 'ย่อ ▲';
+  });
+}
+
+
+const targetDate = new Date('2026-12-05T06:00:00+07:00').getTime();
+
+function updateCountdown() {
+  const now = Date.now();
+  const distance = targetDate - now;
+
+  if (distance <= 0) {
+    document.getElementById('cdDays').textContent = '00';
+    document.getElementById('cdHours').textContent = '00';
+    document.getElementById('cdMinutes').textContent = '00';
+    document.getElementById('cdSeconds').textContent = '00';
+    document.getElementById('countdownMessage').textContent =
+      '🎉 ถึงเวลาออกเดินทางแล้ว!';
+    return;
+  }
+
+  document.getElementById('cdDays').textContent =
+    String(Math.floor(distance / 86400000)).padStart(2, '0');
+
+  document.getElementById('cdHours').textContent =
+    String(Math.floor((distance % 86400000) / 3600000)).padStart(2, '0');
+
+  document.getElementById('cdMinutes').textContent =
+    String(Math.floor((distance % 3600000) / 60000)).padStart(2, '0');
+
+  document.getElementById('cdSeconds').textContent =
+    String(Math.floor((distance % 60000) / 1000)).padStart(2, '0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+
+const slideshow = document.getElementById('tourSlideshow');
+
+if (slideshow) {
+  const slides = [...slideshow.querySelectorAll('.tour-slide')];
+  const dots = [...slideshow.querySelectorAll('.tour-dot')];
+
+  let current = 0;
+  let timer;
+
+  function showSlide(index) {
+    current = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === current);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+      dot.setAttribute(
+        'aria-current',
+        i === current ? 'true' : 'false'
+      );
+    });
+  }
+
+  function startSlideshow() {
+    clearInterval(timer);
+
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    timer = setInterval(() => {
+      showSlide(current + 1);
+    }, 6000);
+  }
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      showSlide(index);
+      startSlideshow();
+    });
+  });
+
+  showSlide(0);
+  startSlideshow();
+}
+
+
+const authorToggle = document.getElementById('authorToggle');
+const authorContent = document.getElementById('authorContent');
+
+if (authorToggle && authorContent) {
+  authorToggle.addEventListener('click', () => {
+    const expanded =
+      authorToggle.getAttribute('aria-expanded') === 'true';
+
+    authorToggle.setAttribute('aria-expanded', String(!expanded));
+    authorContent.hidden = expanded;
+
+    authorToggle.textContent = expanded
+      ? 'ดูข้อมูล ▼'
+      : 'ซ่อนข้อมูล ▲';
+  });
+}
+
+
+
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module">
+
+const SUPABASE_URL = 'https://noodiehkzklwacfdzytw.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_8wxViIzC-xjoEX6xMJXDhA_enwdWF1x';
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+const messageForm = document.getElementById('messageForm');
+const messageText = document.getElementById('messageText');
+const messageList = document.getElementById('messageList');
+const messageCount = document.getElementById('messageCount');
+const submitButton = messageForm.querySelector('button[type="submit"]');
+
+const client = supabaseClient;
+const VOTER_KEY = 'isan-tour-voter-id';
+
+function getVoterId() {
+  let id = localStorage.getItem(VOTER_KEY);
+
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem(VOTER_KEY, id);
+  }
+
+  return id;
+}
+
+const voterId = getVoterId();
+
+function makeElement(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
+}
+
+function makeLikeButton(item) {
+  const likes = item.message_likes?.length ?? 0;
+  const liked = item.message_likes?.some(
+    (like) => like.voter_id === voterId
+  ) ?? false;
+  const heart = makeElement(
+    'button',
+    `heart-button${liked ? ' liked' : ''}`,
+    `${liked ? '❤️' : '🤍'} ${likes}`
+  );
+
+  heart.type = 'button';
+  heart.disabled = liked;
+  heart.setAttribute('aria-label', `กดหัวใจข้อความของ ${item.name}`);
+  heart.addEventListener('click', async () => {
+    if (liked) return;
+
+    heart.disabled = true;
+
+    try {
+      const { error } = await client
+        .from('message_likes')
+        .insert({
+          message_id: item.id,
+          voter_id: voterId
+        });
+
+      if (error && error.code !== '23505') {
+        console.error(error);
+        alert('กดหัวใจไม่สำเร็จ กรุณาลองใหม่');
+        heart.disabled = false;
+        return;
+      }
+
+      await loadMessages();
+    } catch (error) {
+      console.error(error);
+      alert('กดหัวใจไม่สำเร็จ กรุณาลองใหม่');
+      heart.disabled = false;
+    }
+  });
+
+  return heart;
+}
+
+async function loadMessages() {
+  const { data, error } = await client
+    .from('messages')
+    .select('id, name, message, created_at, message_likes(id, voter_id)')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error(error);
+    messageList.replaceChildren(
+      makeElement(
+        'p',
+        'message-empty',
+        'โหลดข้อความไม่สำเร็จ กรุณาลองใหม่อีกครั้ง'
+      )
+    );
+    return;
+  }
+
+  renderTopLiked(data);
+
+  const sorted = data
+    .map((item) => ({
+      ...item,
+      likes: item.message_likes.length,
+      liked: item.message_likes.some(
+        (like) => like.voter_id === voterId
+      )
+    }))
+    .sort((a, b) =>
+      new Date(b.created_at) - new Date(a.created_at)
+    );
+
+  messageCount.textContent = `${sorted.length} ข้อความ`;
+  messageList.replaceChildren();
+
+  if (!sorted.length) {
+    messageList.appendChild(
+      makeElement(
+        'p',
+        'message-empty',
+        '🌷 ยังไม่มีข้อความ มาเป็นคนแรกกันเลย!'
+      )
+    );
+    return;
+  }
+
+  sorted.forEach((item) => {
+    const note = makeElement('article', 'sticky-note');
+  note.style.backgroundColor = getStickyColor(item.id);
+    const tape = makeElement('div', 'sticky-tape');
+    const name = makeElement('p', 'sticky-name', 'ข้อความจากผู้ร่วมทริป');
+    const content = makeElement('p', 'sticky-text', item.message);
+    const footer = makeElement('div', 'sticky-footer');
+
+    const date = makeElement(
+      'span',
+      'sticky-date',
+      new Date(item.created_at).toLocaleDateString('th-TH', {
+        day: 'numeric',
+        month: 'short'
+      })
+    );
+
+    const heart = makeLikeButton(item);
+
+    footer.append(date, heart);
+    note.append(tape, name, content, footer);
+    messageList.appendChild(note);
+  });
+}
+
+messageForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const message = messageText.value.trim();
+
+  if (!message) return;
+
+  submitButton.disabled = true;
+
+  try {
+    const { error } = await client
+      .from('messages')
+      .insert({ name: 'ไม่ระบุชื่อ', message });
+
+    if (error) {
+      console.error(error);
+      alert('ฝากข้อความไม่สำเร็จ กรุณาลองใหม่');
+      return;
+    }
+
+    messageForm.reset();
+    await loadMessages();
+  } catch (error) {
+    console.error(error);
+    alert('ฝากข้อความไม่สำเร็จ กรุณาลองใหม่');
+  } finally {
+    submitButton.disabled = false;
+  }
+});
+
+loadMessages();
+
+// ตรวจข้อความใหม่จากผู้ใช้คนอื่นทุก 10 วินาที
+setInterval(loadMessages, 10000);
+
+function getStickyColor(id) {
+  const colors = [
+    '#FFF3A3', // เหลือง
+    '#FFDDE1', // ชมพู
+    '#D9F4D0', // เขียว
+    '#DCEBFF', // ฟ้า
+    '#E9DEFF', // ม่วง
+    '#FFE4C7'  // ส้ม
+  ];
+
+  let hash = 0;
+
+  for (let i = 0; i < id.length; i++) {
+    hash = (hash * 31 + id.charCodeAt(i)) | 0;
+  }
+
+  return colors[Math.abs(hash) % colors.length];
+}
+
+function renderTopLiked(data) {
+  const container = document.getElementById('topLikedList');
+  if (!container) return;
+
+  const topThree = [...data]
+    .map(item => ({
+      ...item,
+      likes: item.message_likes?.length ?? 0
+    }))
+    .sort((a, b) =>
+      b.likes - a.likes ||
+      new Date(a.created_at) - new Date(b.created_at)
+    )
+    .slice(0, 3);
+
+  container.replaceChildren();
+
+  if (!topThree.length) {
+    container.appendChild(
+      makeElement('p', 'top-liked-empty', '💌 ยังไม่มีข้อความ')
+    );
+    return;
+  }
+
+  const ranks = ['🥇 อันดับ 1', '🥈 อันดับ 2', '🥉 อันดับ 3'];
+
+  topThree.forEach((item, index) => {
+    const card = makeElement('article', 'top-liked-card');
+    card.style.backgroundColor = getStickyColor(item.id);
+
+    const rank = makeElement('p', 'top-liked-rank', ranks[index]);
+    const message = makeElement('p', 'top-liked-message', item.message);
+    const footer = makeElement('div', 'top-liked-footer');
+    const date = makeElement(
+      'span',
+      '',
+      new Date(item.created_at).toLocaleDateString('th-TH', {
+        day: 'numeric',
+        month: 'short'
+      })
+    );
+    const likes = makeLikeButton(item);
+
+    footer.append(date, likes);
+    card.append(rank, message, footer);
+    container.appendChild(card);
+  });
+}
+
+  </script>
+
 </body>
 </html>
