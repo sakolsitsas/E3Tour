@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f0e5">
+  <title>โหวตรูปกลุ่มเพื่อน</title>
+  <style>
+   
+:root {
+  color-scheme: light;
+
+  /* ธีมอีสานร่วมสมัย: คราม ดิน ครีม */
+  --ink: #34352f;
+  --muted: #6b6b60;
+  --line: #ded8c9;
+  --bg: #f4f0e5;
+  --surface: #fffdf7;
+  --input-bg: #ffffff;
+  --soft: #ebe6d8;
+  --photo-placeholder: #e5dfd1;
+
+  --primary: #405c59;
+  --primary-hover: #304744;
+  --primary-text: #ffffff;
+
+  --vote-bg: #e2eadf;
+  --vote-text: #304f3b;
+  --vote-border: #b8cbb5;
+  --vote-selected: #405c59;
+
+  --error-bg: #f5e5df;
+  --error-text: #843f32;
+  --success-bg: #e1ebdd;
+  --success-text: #315b3c;
+
+  --focus: #a66b36;
+  --shadow: 0 3px 12px rgba(65, 54, 35, 0.06);
+}
+
+body.dark-mode {
+  color-scheme: dark;
+
+  /* โหมดมืด: ถ่าน เทาหม่น ครามหม่น */
+  --ink: #eeeae0;
+  --muted: #c1bdb2;
+  --line: #454640;
+  --bg: #20211f;
+  --surface: #2a2b28;
+  --input-bg: #333430;
+  --soft: #383934;
+  --photo-placeholder: #383934;
+
+  --primary: #718b83;
+  --primary-hover: #849b92;
+  --primary-text: #171c19;
+
+  --vote-bg: #343c35;
+  --vote-text: #e1e9dc;
+  --vote-border: #58675a;
+  --vote-selected: #718b83;
+
+  --error-bg: #49332e;
+  --error-text: #f2c7b9;
+  --success-bg: #303e32;
+  --success-text: #d2e7d0;
+
+  --focus: #d0a16e;
+  --shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  transition: background 0.2s, color 0.2s;
+}
+
+main {
+  width: min(100%, 960px);
+  margin: 0 auto;
+  padding: 18px 16px 40px;
+}
+
+header {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin: 0 0 14px;
+}
+
+p {
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  margin: 16px 0;
+  box-shadow: var(--shadow);
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 18px 0 8px;
+}
+
+/* ช่องกรอกข้อมูล */
+input[type="text"],
+input[type="file"] {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--input-bg);
+  color: var(--ink);
+  font: inherit;
+}
+
+input[type="file"] {
+  min-height: 60px;
+}
+
+/* ปุ่มทั้งหมด: ขนาดใหญ่ กดง่าย */
+button {
+  min-height: 48px;
+  padding: 12px 18px;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.4;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, transform 0.15s;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.theme-toggle {
+  background: var(--soft);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.primary {
+  display: block;
+  width: 100%;
+  min-height: 54px;
+  margin-top: 18px;
+  background: var(--primary);
+  color: var(--primary-text);
+  border: none;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.vote {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  background: var(--vote-bg);
+  color: var(--vote-text);
+  border: 1px solid var(--vote-border);
+  margin-top: 10px;
+}
+
+.vote.selected {
+  background: var(--vote-selected);
+  color: var(--primary-text);
+  border-color: var(--vote-selected);
+}
+
+/* แถบหัวเว็บและสถานะ */
+.topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+/* แกลเลอรี */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.photo {
+  min-width: 0;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--photo-placeholder);
+}
+
+.photo .name {
+  font-size: 1.05rem;
+  font-weight: 750;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  margin: 12px 2px 4px;
+}
+
+.photo .score {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: 4px 2px 8px;
+}
+
+/* ข้อความแจ้งผล */
+.status {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--soft);
+  color: var(--ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 1rem;
+}
+
+.status.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.status.ok {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+footer {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-top: 24px;
+  padding: 0 4px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* โทรศัพท์จอเล็ก */
+@media (max-width: 380px) {
+  body {
+    font-size: 16px;
+  }
+
+  main {
+    padding: 10px 10px 28px;
+  }
+
+  header,
+  .panel {
+    padding: 15px;
+    border-radius: 14px;
+  }
+
+  .grid {
+    gap: 8px;
+  }
+
+  .photo {
+    padding: 7px;
+    border-radius: 12px;
+  }
+
+  .photo .name {
+    font-size: 0.98rem;
+  }
+
+  .topline {
+    gap: 10px;
+  }
+
+  .theme-toggle {
+    padding: 10px 12px;
+  }
+}
+
+/* หน้าจอแท็บเล็ต */
+@media (min-width: 650px) {
+  main {
+    padding: 28px 22px 48px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+/* คอมพิวเตอร์ */
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ลดแอนิเมชันสำหรับผู้ที่ตั้งค่าลดการเคลื่อนไหว */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+.topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+  </style>
+</head>
+<body>
+<main>
+  <header>
+  <div class="topline">
+    <h1>Isan Tour Is Coming ....!</h1>
+
+    <button id="themeToggle" type="button">
+       ปรับแสง
+    </button>
+  </div>
+</header>
+
+  <section class="panel" id="uploadPanel" hidden >
+    <h2>ส่งรูปเข้าร่วม</h2>
+    <form id="uploadForm">
+      <label for="nickname">ชื่อเล่น</label>
+      <input id="nickname" type="text" maxlength="40" placeholder="เช่น กลอฟ สุดหล่อ" required>
+      <label for="photoFile">เลือกรูป </label>
+      <input id="photoFile" type="file" accept="image/jpeg,image/png,image/webp" required>
+      <button class="primary" id="uploadBtn" type="submit">อัปโหลดรูป</button>
+    </form>
+    <div id="uploadStatus" class="status" hidden></div>
+  </section>
+
+  <section class="panel" hidden >
+    <div class="topline">
+      <h2>รูปทั้งหมด</h2>
+      <span id="photoCount" class="pill">0 รูป</span>
+    </div>
+    <p id="voteHint" class="muted">กำลังโหลดรูป…</p>
+    <div id="gallery" class="grid"></div>
+    <div id="galleryStatus" class="status" hidden></div>
+  </section>
+
+  <section class="panel" id="resultsPanel" hidden>
+    <h2>คะแนน</h2>
+    <p class="muted">คะแนนจะอัปเดตเมื่อโหลดหน้าเว็บใหม่หรือกดปุ่มรีเฟรช</p>
+    <button id="refreshBtn" type="button">รีเฟรชรูปและคะแนน</button>
+  </section>
+  <footer>หมายเหตุ: เนื่องจากหลายๆกลุ่มเล่นใหญ่กันไว้เยอะ.. </footer>
+</main>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+  // 1) ใส่ค่า Project URL และ anon/public key จาก Supabase Settings > API
+  const SUPABASE_URL = 'https://bgffexsebmemwpxuztcz.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_6R6HqULLH-0uRAeyPOHHhg_iuDUq_WD';
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const $ = (id) => document.getElementById(id);
+  let contest = null;
+  let photos = [];
+  const tokenKey = () => `photo-vote-token-${contest?.id || 'none'}`;
+  function getVoterToken() {
+    let token = localStorage.getItem(tokenKey());
+    if (!token) {
+      token = crypto.randomUUID();
+      localStorage.setItem(tokenKey(), token);
+    }
+    return token;
+  }
+  function setStatus(id, message, kind = '') {
+    const el = $(id);
+    el.hidden = !message;
+    el.textContent = message;
+    el.className = `status ${kind}`;
+  }
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  async function init() {
+    if (SUPABASE_URL.includes('ใส่_') || SUPABASE_ANON_KEY.includes('ใส่_')) {
+      $('roundStatus').textContent = 'ยังไม่ได้ตั้งค่า';
+      setStatus('galleryStatus', 'ก่อนใช้งาน ให้ใส่ SUPABASE_URL และ SUPABASE_ANON_KEY ในไฟล์ index.html แล้วทำตาม README', 'error');
+      $('voteHint').textContent = 'ยังไม่ได้เชื่อมต่อ Supabase';
+      return;
+    }
+    try {
+      const { data, error } = await supabase.from('contests')
+        .select('id,title,status,upload_open,voting_open')
+        .eq('is_current', true).limit(1).maybeSingle();
+      if (error) throw error;
+      if (!data) throw new Error('ยังไม่มีกิจกรรม กรุณารัน SQL ใน README ก่อน');
+      contest = data;
+      document.title = data.title;
+      $('roundStatus').textContent = data.status === 'finished' ? 'ปิดกิจกรรมแล้ว' : (data.voting_open ? 'เปิดโหวต' : 'ยังไม่เปิดโหวต');
+      document.querySelector('header h1').textContent = '📸 ' + data.title;
+      $('uploadPanel').hidden = !data.upload_open;
+      $('voteHint').textContent = data.voting_open ? 'เลือกได้ 1 รูป เมื่อโหวตแล้วจะเปลี่ยนโหวตไม่ได้ในเบราว์เซอร์เดิม' : 'ขณะนี้ยังไม่เปิดโหวต';
+      await loadPhotos();
+    } catch (err) {
+      $('roundStatus').textContent = 'มีปัญหา';
+      setStatus('galleryStatus', 'โหลดกิจกรรมไม่สำเร็จ: ' + err.message, 'error');
+      $('voteHint').textContent = 'ตรวจสอบการตั้งค่า Supabase และ SQL';
+    }
+  }
+
+  async function loadPhotos() {
+    if (!contest) return;
+    setStatus('galleryStatus', '');
+    const [{ data: photoData, error: photoError }, { data: voteData, error: voteError }] = await Promise.all([
+      supabase.from('photos').select('id,nickname,storage_path,created_at').eq('contest_id', contest.id).order('created_at', { ascending: false }),
+      supabase.from('votes').select('photo_id').eq('contest_id', contest.id)
+    ]);
+    if (photoError) throw photoError;
+    if (voteError) throw voteError;
+    const counts = {};
+    for (const vote of (voteData || [])) counts[vote.photo_id] = (counts[vote.photo_id] || 0) + 1;
+    photos = (photoData || []).map(p => {
+      const { data } = supabase.storage.from('contest-photos').getPublicUrl(p.storage_path);
+      return { ...p, imageUrl: data.publicUrl, score: counts[p.id] || 0 };
+    });
+    $('photoCount').textContent = `${photos.length} รูป`;
+    const votedPhotoId = localStorage.getItem(`photo-vote-choice-${contest.id}`);
+    $('gallery').innerHTML = '';
+    if (!photos.length) {
+      $('gallery').innerHTML = '<p class="muted">ยังไม่มีรูป ลองส่งรูปแรกของกลุ่มดูเลย!</p>';
+      return;
+    }
+    for (const photo of photos) {
+      const card = document.createElement('article');
+      card.className = 'photo';
+      const img = document.createElement('img');
+      img.src = photo.imageUrl;
+      img.alt = 'รูปของ ' + photo.nickname;
+      img.loading = 'lazy';
+      const name = document.createElement('div');
+      name.className = 'name';
+      name.textContent = photo.nickname;
+      const score = document.createElement('p');
+      score.className = 'score';
+      score.textContent = `${photo.score} คะแนน`;
+      const btn = document.createElement('button');
+      btn.className = 'vote' + (votedPhotoId === photo.id ? ' selected' : '');
+      btn.textContent = votedPhotoId === photo.id ? '✓ คุณเลือกภาพนี้แล้ว' : 'โหวตรูปนี้';
+      btn.disabled = !contest.voting_open || Boolean(votedPhotoId);
+      btn.addEventListener('click', () => voteFor(photo.id));
+      card.append(img, name, score, btn);
+      $('gallery').append(card);
+    }
+  }
+
+  async function voteFor(photoId) {
+    if (!contest?.voting_open) return;
+    if (localStorage.getItem(`photo-vote-choice-${contest.id}`)) {
+      alert('เบราว์เซอร์นี้ลงคะแนนไปแล้วในรอบนี้');
+      return;
+    }
+    const buttons = [...document.querySelectorAll('.vote')];
+    buttons.forEach(b => b.disabled = true);
+    try {
+      const { error } = await supabase.from('votes').insert({
+        contest_id: contest.id,
+        photo_id: photoId,
+        voter_token: getVoterToken()
+      });
+      if (error) {
+        if (error.code === '23505') throw new Error('เบราว์เซอร์นี้ลงคะแนนไปแล้ว');
+        throw error;
+      }
+      localStorage.setItem(`photo-vote-choice-${contest.id}`, photoId);
+      setStatus('galleryStatus', 'โหวตเรียบร้อยแล้ว ขอบคุณครับ!', 'ok');
+      await loadPhotos();
+    } catch (err) {
+      setStatus('galleryStatus', 'โหวตไม่สำเร็จ: ' + err.message, 'error');
+      buttons.forEach(b => b.disabled = false);
+    }
+  }
+
+  $('uploadForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!contest?.upload_open) return;
+    const nickname = $('nickname').value.trim();
+    const file = $('photoFile').files[0];
+    if (!nickname || !file) return;
+    if (file.size > 20 * 1024 * 1024) {
+      setStatus('uploadStatus', 'ไฟล์ใหญ่เกิน 20 MB กรุณาเลือกรูปที่เล็กกว่านี้', 'error');
+      return;
+    }
+    if (![
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/heic',
+    'image/heif'
+    ].includes(file.type)) {
+      setStatus('uploadStatus', 'รองรับเฉพาะ JPG, PNG, WebP และ HEIC/HEIF', 'error');
+      return;
+    }
+    const btn = $('uploadBtn');
+    btn.disabled = true;
+    btn.textContent = 'กำลังอัปโหลด…';
+    setStatus('uploadStatus', '');
+    try {
+      const ext = ({'image/jpeg':'jpg','image/png':'png','image/webp':'webp'})[file.type];
+      const path = `${contest.id}/${crypto.randomUUID()}.${ext}`;
+      const { error: storageError } = await supabase.storage.from('contest-photos').upload(path, file, {
+        contentType: file.type, upsert: false
+      });
+      if (storageError) throw storageError;
+      const { error: insertError } = await supabase.from('photos').insert({
+        contest_id: contest.id, nickname, storage_path: path
+      });
+      if (insertError) {
+        await supabase.storage.from('contest-photos').remove([path]);
+        throw insertError;
+      }
+      $('uploadForm').reset();
+      setStatus('uploadStatus', 'ส่งรูปเรียบร้อยแล้ว!', 'ok');
+      await loadPhotos();
+    } catch (err) {
+      setStatus('uploadStatus', 'อัปโหลดไม่สำเร็จ: ' + err.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'อัปโหลดรูป';
+    }
+  });
+
+  $('refreshBtn').addEventListener('click', () => loadPhotos().catch(err => setStatus('galleryStatus', err.message, 'error')));
+  init();
+
+  const themeToggle = document.getElementById('themeToggle');
+
+  function updateThemeButton() {
+    const isDark = document.body.classList.contains('dark-mode');
+
+    themeToggle.textContent = isDark
+      ? ' มืดมองไม่เห็น'
+      : ' แสบตาไม่ไหว' ; 
+  }
+
+  // โหลดค่าที่บันทึกไว้
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+
+  updateThemeButton();
+
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    const isDark = document.body.classList.contains('dark-mode');
+
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+    updateThemeButton();
+  });
+  </script>
+</body>
+</html>
