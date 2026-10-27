@@ -6,6 +6,456 @@
   <meta name="theme-color" content="#f4f0e5">
   <title>YANG MAI DAI KID SHU TRIP · ISAN</title>
   <style>
+
+/* ===== ISAN MAP SECTION ===== */
+.isan-map-section {
+  --imap-bg: var(--card-bg, var(--panel-bg, #ffffff));
+  --imap-text: var(--text-color, var(--text, #202124));
+  --imap-muted: var(--muted-color, var(--text-muted, #727783));
+  --imap-border: var(--border-color, #e4e7ec);
+  --imap-hover: var(--hover-bg, #f3f5f8);
+  --imap-accent: var(--accent-color, #b88b4a);
+
+  margin: 36px auto;
+  padding: 28px;
+  color: var(--imap-text);
+  background: var(--imap-bg);
+  border: 1px solid var(--imap-border);
+  border-radius: 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.isan-map-section *,
+.isan-map-section *::before,
+.isan-map-section *::after {
+  box-sizing: border-box;
+}
+
+.isan-map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.isan-map-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--imap-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.isan-map-header h2 {
+  margin: 0;
+  color: var(--imap-text);
+  font-size: clamp(25px, 3vw, 36px);
+  line-height: 1.3;
+}
+
+.isan-map-header p {
+  margin: 8px 0 0;
+  color: var(--imap-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.isan-emergency-link {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 15px;
+  color: #dc2626;
+  background: color-mix(in srgb, #dc2626 9%, var(--imap-bg));
+  border: 1px solid color-mix(in srgb, #dc2626 25%, var(--imap-border));
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.isan-map-day-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.isan-day-btn {
+  padding: 9px 16px;
+  color: var(--imap-muted);
+  background: transparent;
+  border: 1px solid var(--imap-border);
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.isan-day-btn:hover {
+  background: var(--imap-hover);
+  color: var(--imap-text);
+}
+
+.isan-day-btn.active {
+  color: #fff;
+  background: var(--imap-text);
+  border-color: var(--imap-text);
+}
+
+.isan-map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  margin-bottom: 18px;
+  color: var(--imap-muted);
+  font-size: 12px;
+}
+
+.isan-map-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.dot-attraction { background: #3478db; }
+.dot-start { background: #16a34a; }
+.dot-finish { background: #dc2626; }
+.dot-meal { background: #d97706; }
+.dot-hotel { background: #0891b2; }
+.dot-hospital { background: #e11d48; }
+
+.isan-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(270px, 0.85fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.isan-map-canvas-wrap {
+  position: relative;
+  min-width: 0;
+  min-height: 520px;
+  overflow: hidden;
+  border: 1px solid var(--imap-border);
+  border-radius: 18px;
+  background: var(--imap-hover);
+}
+
+#isan-map {
+  width: 100%;
+  height: 520px;
+  z-index: 1;
+  background: #e8edf0;
+}
+
+.isan-map-caption {
+  position: absolute;
+  z-index: 500;
+  left: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  color: #25313d;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+.isan-map-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+.isan-map-sidebar {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-height: 520px;
+  overflow: hidden;
+  border: 1px solid var(--imap-border);
+  border-radius: 18px;
+}
+
+.isan-map-sidebar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px;
+  border-bottom: 1px solid var(--imap-border);
+}
+
+.isan-map-sidebar-head h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--imap-text);
+}
+
+.isan-map-sidebar-head p {
+  margin: 5px 0 0;
+  color: var(--imap-muted);
+  font-size: 12px;
+}
+
+.isan-map-pin-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--imap-hover);
+  font-size: 23px;
+}
+
+.isan-map-locations {
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1;
+  padding: 8px;
+}
+
+.isan-map-location {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  color: var(--imap-text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.isan-map-location:hover,
+.isan-map-location.selected {
+  background: var(--imap-hover);
+  border-color: var(--imap-border);
+}
+
+.isan-map-location-marker {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.isan-map-location-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.isan-map-location-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.isan-map-location-time {
+  color: var(--imap-accent);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.isan-map-location-type {
+  color: var(--imap-muted);
+  font-size: 10px;
+}
+
+.isan-map-location-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.isan-map-location-desc {
+  margin-top: 4px;
+  color: var(--imap-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.isan-map-location-link {
+  display: inline-block;
+  margin-top: 7px;
+  color: var(--imap-accent);
+  font-size: 11px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.isan-map-note {
+  margin: 0;
+  padding: 12px 16px;
+  color: var(--imap-muted);
+  background: var(--imap-hover);
+  border-top: 1px solid var(--imap-border);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.isan-map-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  color: var(--imap-muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.isan-map-footer button {
+  padding: 8px 12px;
+  color: var(--imap-text);
+  background: var(--imap-hover);
+  border: 1px solid var(--imap-border);
+  border-radius: 9px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+/* Custom map markers */
+.isan-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 8px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  transform: rotate(-45deg);
+}
+
+.isan-pin span {
+  transform: rotate(45deg);
+}
+
+.isan-map-popup {
+  min-width: 190px;
+  color: #202124;
+  line-height: 1.6;
+}
+
+.isan-map-popup strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.isan-map-popup p {
+  margin: 4px 0 8px;
+  font-size: 12px;
+}
+
+.isan-map-popup a {
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.isan-map-section .leaflet-control-zoom a {
+  color: #202124;
+}
+
+@media (max-width: 800px) {
+  .isan-map-section {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .isan-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .isan-map-canvas-wrap,
+  #isan-map {
+    min-height: 360px;
+    height: 360px;
+  }
+
+  .isan-map-sidebar {
+    max-height: 420px;
+  }
+
+  .isan-map-header {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .isan-map-section {
+    padding: 14px;
+  }
+
+  .isan-map-header {
+    flex-direction: column;
+  }
+
+  .isan-map-header h2 {
+    font-size: 25px;
+  }
+
+  .isan-map-day-tabs {
+    gap: 6px;
+  }
+
+  .isan-day-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .isan-map-legend {
+    gap: 10px;
+    font-size: 11px;
+  }
+
+  .isan-map-footer {
+    align-items: flex-start;
+  }
+}
+
    
 :root {
   color-scheme: light;
@@ -1095,6 +1545,10 @@ html {
 
 
   </style>
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
 </head>
 <body>
 <main>
@@ -1281,6 +1735,7 @@ html {
 
 
 
+
   <section class="panel" id="itineraryPanel">
   <div class="topline">
     <h2> กำหนดการเดินทาง</h2>
@@ -1384,6 +1839,85 @@ html {
       </div>
     </article>
   </div>
+  </div>
+</section>
+
+
+
+<section id="isan-map-section" class="isan-map-section">
+  <div class="isan-map-header">
+    <div>
+      <span class="isan-map-eyebrow">ISAN FIELD TRIP · 2026</span>
+      <h2>แผนที่การเดินทาง</h2>
+      <p>สำรวจเส้นทางอารยธรรมอีสานใต้ 3 วัน 2 คืน</p>
+    </div>
+
+    <a
+      class="isan-emergency-link"
+      href="tel:1669"
+      aria-label="โทรเรียกรถพยาบาลฉุกเฉิน 1669"
+    >
+      <span>✚</span> ฉุกเฉิน 1669
+    </a>
+  </div>
+
+  <div class="isan-map-day-tabs" aria-label="เลือกวันเดินทาง">
+    <button type="button" class="isan-day-btn active" data-day="all">
+      ทั้งหมด
+    </button>
+    <button type="button" class="isan-day-btn" data-day="1">
+      DAY 1
+    </button>
+    <button type="button" class="isan-day-btn" data-day="2">
+      DAY 2
+    </button>
+    <button type="button" class="isan-day-btn" data-day="3">
+      DAY 3
+    </button>
+    <button type="button" class="isan-day-btn" data-day="hospital">
+      โรงพยาบาล
+    </button>
+  </div>
+
+  <div class="isan-map-legend">
+    <span><i class="legend-dot dot-attraction"></i> สถานที่ท่องเที่ยว</span>
+    <span><i class="legend-dot dot-start"></i> เริ่มต้น</span>
+    <span><i class="legend-dot dot-finish"></i> สิ้นสุด</span>
+    <span><i class="legend-dot dot-meal"></i> อาหาร</span>
+    <span><i class="legend-dot dot-hotel"></i> ที่พัก</span>
+    <span><i class="legend-dot dot-hospital"></i> โรงพยาบาล</span>
+  </div>
+
+  <div class="isan-map-layout">
+    <div class="isan-map-canvas-wrap">
+      <div id="isan-map" aria-label="แผนที่เส้นทางทริปอีสาน"></div>
+      <div class="isan-map-caption">
+        <span class="isan-map-live-dot"></span>
+        INTERACTIVE ROUTE MAP
+      </div>
+    </div>
+
+    <aside class="isan-map-sidebar">
+      <div class="isan-map-sidebar-head">
+        <div>
+          <h3 id="isan-map-list-title">สถานที่ทั้งหมด</h3>
+          <p id="isan-map-list-count">กำลังโหลดรายการ...</p>
+        </div>
+        <span class="isan-map-pin-icon">⌖</span>
+      </div>
+
+      <div id="isan-map-locations" class="isan-map-locations"></div>
+
+      <p class="isan-map-note">
+        * จุดอาหารและโรงแรมบางจุดเป็นตำแหน่งตัวอย่าง
+        โปรดยืนยันสถานที่จริงก่อนเดินทาง
+      </p>
+    </aside>
+  </div>
+
+  <div class="isan-map-footer">
+    <span>MAP DATA · OPENSTREETMAP</span>
+    <button type="button" id="isan-map-reset">แสดงทุกสถานที่ ↗</button>
   </div>
 </section>
 
@@ -1623,400 +2157,6 @@ function showSecretHint(card) {
 }
 </script>
 
-
-<!-- ISAN TOUR MAP -->
-<section id="isan-map-section" class="isan-map-section">
-  <div class="isan-map-heading">
-    <div>
-      <span class="isan-map-eyebrow">TRAVEL SMART · STAY SAFE</span>
-      <h2>แผนที่ทริปอีสาน</h2>
-      <p>สถานที่สำคัญ โรงพยาบาล และจุดที่ควรรู้ก่อนออกเดินทาง</p>
-    </div>
-    <a class="isan-map-emergency" href="tel:1669">
-      🚑 โทรฉุกเฉิน 1669
-    </a>
-  </div>
-
-  <div class="isan-map-legend">
-    <span><i class="map-dot hospital-dot"></i> โรงพยาบาล</span>
-    <span><i class="map-dot place-dot"></i> สถานที่สำคัญ</span>
-    <span><i class="map-dot meeting-dot"></i> จุดนัดพบ / ที่พัก</span>
-  </div>
-
-  <div class="isan-map-layout">
-    <div id="isan-map" aria-label="แผนที่ทริปอีสาน"></div>
-
-    <aside class="isan-map-sidebar">
-      <div class="isan-map-list-heading">
-        <strong>LOCATION GUIDE</strong>
-        <span id="isan-map-count">กำลังโหลดหมุด...</span>
-      </div>
-      <div id="isan-map-locations"></div>
-      <p class="isan-map-note">
-        แตะรายการเพื่อดูตำแหน่ง หรือเปิด Google Maps สำหรับนำทาง
-      </p>
-    </aside>
-  </div>
-</section>
-
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<style>
-.isan-map-section {
-  margin: 36px 0;
-  padding: clamp(18px, 4vw, 32px);
-  background: var(--card-bg, #fff);
-  border: 1px solid var(--border-color, #e5e7eb);
-  border-radius: 22px;
-  color: var(--text-color, #202124);
-}
-.isan-map-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 22px;
-}
-.isan-map-eyebrow {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #927044;
-  font-weight: 800;
-}
-.isan-map-heading h2 {
-  margin: 8px 0;
-  font-size: clamp(25px, 4vw, 34px);
-}
-.isan-map-heading p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.7;
-  opacity: .72;
-}
-.isan-map-emergency {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 11px 15px;
-  border-radius: 12px;
-  background: #fff0f0;
-  color: #b42318;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 800;
-}
-.isan-map-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 14px;
-  font-size: 12px;
-  opacity: .85;
-}
-.isan-map-legend span {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
-.map-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-}
-.hospital-dot { background: #e5484d; }
-.place-dot { background: #3678d4; }
-.meeting-dot { background: #169b79; }
-
-.isan-map-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr);
-  border: 1px solid var(--border-color, #e5e7eb);
-  border-radius: 16px;
-  overflow: hidden;
-}
-#isan-map {
-  width: 100%;
-  height: 510px;
-  z-index: 1;
-  background: #e8edf0;
-}
-.isan-map-sidebar {
-  min-width: 0;
-  max-height: 510px;
-  overflow-y: auto;
-  border-left: 1px solid var(--border-color, #e5e7eb);
-}
-.isan-map-list-heading {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  padding: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px;
-  background: var(--card-bg, #fff);
-  border-bottom: 1px solid var(--border-color, #e5e7eb);
-}
-.isan-map-list-heading strong {
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-.isan-map-list-heading span {
-  font-size: 11px;
-  opacity: .65;
-}
-.isan-location-item {
-  width: 100%;
-  display: flex;
-  gap: 12px;
-  padding: 14px 16px;
-  border: 0;
-  border-bottom: 1px solid var(--border-color, #e5e7eb);
-  background: transparent;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-  font: inherit;
-}
-.isan-location-item:hover {
-  background: var(--hover-bg, #f7f7fa);
-}
-.isan-location-icon {
-  flex: 0 0 34px;
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border-radius: 10px;
-  background: var(--hover-bg, #f4f4f8);
-}
-.isan-location-text strong {
-  display: block;
-  font-size: 13px;
-  line-height: 1.6;
-}
-.isan-location-text small {
-  display: block;
-  margin-top: 3px;
-  opacity: .68;
-  font-size: 11px;
-  line-height: 1.6;
-}
-.isan-location-text a {
-  display: inline-block;
-  margin-top: 7px;
-  color: #3977c5;
-  text-decoration: none;
-  font-size: 11px;
-  font-weight: 700;
-}
-.isan-map-note {
-  margin: 0;
-  padding: 14px 16px;
-  font-size: 11px;
-  line-height: 1.7;
-  opacity: .65;
-}
-.isan-map-section .leaflet-popup-content {
-  line-height: 1.7;
-}
-.isan-map-section .leaflet-popup-content a {
-  color: #2868b2;
-  font-weight: 700;
-}
-@media (max-width: 720px) {
-  .isan-map-layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  #isan-map { height: 350px; }
-  .isan-map-sidebar {
-    max-height: 350px;
-    border-left: 0;
-    border-top: 1px solid var(--border-color, #e5e7eb);
-  }
-}
-</style>
-
-<script>
-(() => {
-  // แก้ไขรายชื่อสถานที่ได้ในรายการนี้
-  // ระบบค้นหาตำแหน่งจากชื่อสถานที่ผ่าน OpenStreetMap
-  const locations = [
-    {
-      name: "โรงพยาบาลมหาราชนครราชสีมา",
-      query: "Maharat Nakhon Ratchasima Hospital, Thailand",
-      type: "hospital",
-      detail: "โรงพยาบาล · โทร. 044-235000"
-    },
-    {
-      name: "โรงพยาบาลราชสีมา",
-      query: "Ratchasima Hospital, Nakhon Ratchasima, Thailand",
-      type: "hospital",
-      detail: "โรงพยาบาล · โทร. 044-263777"
-    },
-    {
-      name: "โรงพยาบาลบุรีรัมย์",
-      query: "Buriram Hospital, Buriram, Thailand",
-      type: "hospital",
-      detail: "โรงพยาบาล · โทร. 044-615002"
-    },
-    {
-      name: "โรงพยาบาลบุรีรัมย์ ราม",
-      query: "Buriram Ram Hospital, Buriram, Thailand",
-      type: "hospital",
-      detail: "โรงพยาบาลเอกชน · โทร. 044-614100"
-    },
-
-    // เพิ่มสถานที่ท่องเที่ยว โรงแรม และจุดนัดพบของทริปตรงนี้
-    {
-      name: "ปราสาทหินพิมาย",
-      query: "Phimai Historical Park, Nakhon Ratchasima, Thailand",
-      type: "place",
-      detail: "สถานที่สำคัญ · นครราชสีมา"
-    },
-    {
-      name: "ปราสาทพนมรุ้ง",
-      query: "Phanom Rung Historical Park, Buriram, Thailand",
-      type: "place",
-      detail: "สถานที่สำคัญ · บุรีรัมย์"
-    }
-  ];
-
-  const mapElement = document.getElementById("isan-map");
-  const listElement = document.getElementById("isan-map-locations");
-  const countElement = document.getElementById("isan-map-count");
-
-  if (!mapElement || !listElement || !window.L) {
-    if (countElement) countElement.textContent = "โหลดแผนที่ไม่สำเร็จ";
-    return;
-  }
-
-  const map = L.map(mapElement, { scrollWheelZoom: false })
-    .setView([15.2, 102.5], 8);
-
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map);
-
-  const icons = {
-    hospital: "🏥",
-    place: "📍",
-    meeting: "🚌"
-  };
-
-  const colors = {
-    hospital: "#e5484d",
-    place: "#3678d4",
-    meeting: "#169b79"
-  };
-
-  const points = [];
-  let loaded = 0;
-
-  function addLocation(location, lat, lon) {
-    const point = [lat, lon];
-    points.push(point);
-
-    const marker = L.circleMarker(point, {
-      radius: location.type === "hospital" ? 9 : 8,
-      color: "#ffffff",
-      weight: 2,
-      fillColor: colors[location.type] || colors.place,
-      fillOpacity: 1
-    }).addTo(map);
-
-    const googleMapsUrl =
-      "https://www.google.com/maps/search/?api=1&query=" +
-      encodeURIComponent(location.name);
-
-    marker.bindPopup(
-      "<strong>" + escapeHTML(location.name) + "</strong><br>" +
-      escapeHTML(location.detail || "") + "<br>" +
-      '<a href="' + googleMapsUrl +
-      '" target="_blank" rel="noopener noreferrer">เปิด Google Maps ↗</a>'
-    );
-
-    const item = document.createElement("button");
-    item.type = "button";
-    item.className = "isan-location-item";
-    item.innerHTML =
-      '<span class="isan-location-icon">' +
-      icons[location.type] + '</span>' +
-      '<span class="isan-location-text"><strong>' +
-      escapeHTML(location.name) + '</strong><small>' +
-      escapeHTML(location.detail || "") +
-      '</small><a href="' + googleMapsUrl +
-      '" target="_blank" rel="noopener noreferrer">นำทางด้วย Google Maps ↗</a></span>';
-
-    item.addEventListener("click", event => {
-      if (event.target.closest("a")) return;
-      map.flyTo(point, 14, { duration: 0.7 });
-      marker.openPopup();
-    });
-
-    listElement.appendChild(item);
-    loaded++;
-    countElement.textContent = loaded + " จุด";
-  }
-
-  function escapeHTML(value) {
-    return String(value).replace(/[&<>"']/g, char => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[char]);
-  }
-
-  async function locate(location) {
-    try {
-      const url = "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=" +
-        encodeURIComponent(location.query);
-
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Geocoding failed");
-
-      const results = await response.json();
-      if (!results.length) {
-        console.warn("ไม่พบตำแหน่ง:", location.name);
-        return;
-      }
-
-      addLocation(location, Number(results[0].lat), Number(results[0].lon));
-    } catch (error) {
-      console.warn("ค้นหาตำแหน่งไม่สำเร็จ:", location.name, error);
-    }
-  }
-
-  async function loadLocations() {
-    for (const location of locations) {
-      await locate(location);
-      // ลดความถี่การเรียกบริการค้นหาตำแหน่ง
-      await new Promise(resolve => setTimeout(resolve, 1100));
-    }
-
-    if (points.length) {
-      map.fitBounds(L.latLngBounds(points).pad(0.15));
-      setTimeout(() => map.invalidateSize(), 250);
-    }
-
-    countElement.textContent = loaded
-      ? loaded + " จุดบนแผนที่"
-      : "ไม่พบตำแหน่ง กรุณาลองใหม่";
-  }
-
-  loadLocations();
-})();
-</script>
 
 
 
@@ -2430,7 +2570,391 @@ function renderTopLiked(data) {
   });
 }
 
+
+
   </script>
+
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+(() => {
+  const mapElement = document.getElementById("isan-map");
+
+  // ป้องกันสคริปต์ทำงานหากไม่มี Section แผนที่
+  if (!mapElement || typeof L === "undefined") return;
+
+  // พิกัดบางจุด เช่น ร้านอาหาร โรงแรม และแหล่งเกลือ
+  // เป็นตำแหน่งประมาณ ต้องแก้เป็นพิกัดจริงก่อนใช้งานนำทาง
+  const locations = [
+    // DAY 1 — นครราชสีมา
+    {
+      day: 1, time: "06:00",
+      name: "มหาวิทยาลัยศิลปากร วังท่าพระ",
+      type: "start", lat: 13.7516, lng: 100.4914,
+      description: "จุดเริ่มต้นการเดินทางจากกรุงเทพฯ"
+    },
+    {
+      day: 1, time: "11:00",
+      name: "วัดพระนอนธรรมจักรเสมาราม",
+      type: "attraction", lat: 15.002, lng: 102.168,
+      description: "โบราณสถานสำคัญในเมืองเสมา อำเภอสูงเนิน"
+    },
+    {
+      day: 1, time: "12:00",
+      name: "จุดรับประทานอาหารกลางวัน",
+      type: "meal", lat: 14.98, lng: 102.1,
+      description: "ตำแหน่งตัวอย่าง — เปลี่ยนเป็นร้านอาหารจริง"
+    },
+    {
+      day: 1, time: "14:00",
+      name: "พิพิธภัณฑ์ไม้กลายเป็นหิน โคราชจีโอพาร์ค",
+      type: "attraction", lat: 14.962, lng: 102.175,
+      description: "พิพิธภัณฑ์ไม้กลายเป็นหิน จังหวัดนครราชสีมา"
+    },
+    {
+      day: 1, time: "15:30",
+      name: "ชุมชนเครื่องปั้นดินเผาด่านเกวียน",
+      type: "attraction", lat: 14.806, lng: 102.205,
+      description: "แหล่งเครื่องปั้นดินเผาที่มีชื่อเสียงของโคราช"
+    },
+    {
+      day: 1, time: "15:30",
+      name: "แหล่งผลิตเกลือบ้านพันดุง",
+      type: "alternative", lat: 15.12, lng: 102.12,
+      description: "ตัวเลือกแทนด่านเกวียน — ต้องยืนยันพิกัด"
+    },
+    {
+      day: 1, time: "17:00",
+      name: "อนุสาวรีย์ท้าวสุรนารี",
+      type: "attraction", lat: 14.975, lng: 102.097,
+      description: "แลนด์มาร์กสำคัญใจกลางเมืองโคราช"
+    },
+    {
+      day: 1, time: "17:00",
+      name: "ประตูชุมพล",
+      type: "attraction", lat: 14.975, lng: 102.096,
+      description: "ประตูเมืองเก่าของนครราชสีมา"
+    },
+    {
+      day: 1, time: "19:00",
+      name: "โรงแรมที่พัก — คืนที่ 1",
+      type: "hotel", lat: 14.98, lng: 102.1,
+      description: "ตำแหน่งตัวอย่าง — เปลี่ยนเป็นโรงแรมจริง"
+    },
+
+    // DAY 2 — บุรีรัมย์
+    {
+      day: 2, time: "07:00",
+      name: "อาหารเช้า — วันที่ 2",
+      type: "meal", lat: 14.98, lng: 102.1,
+      description: "รับประทานอาหารเช้าที่โรงแรม"
+    },
+    {
+      day: 2, time: "08:00",
+      name: "ออกเดินทางสู่จังหวัดบุรีรัมย์",
+      type: "transit", lat: 14.98, lng: 102.1,
+      description: "จุดเริ่มเดินทางจากโรงแรม"
+    },
+    {
+      day: 2, time: "10:00",
+      name: "อุทยานประวัติศาสตร์พนมรุ้ง",
+      type: "attraction", lat: 14.5325, lng: 102.9417,
+      description: "ปราสาทขอมโบราณบนภูเขาไฟที่ดับสนิท"
+    },
+    {
+      day: 2, time: "12:00",
+      name: "จุดรับประทานอาหารกลางวัน — บุรีรัมย์",
+      type: "meal", lat: 14.53, lng: 102.94,
+      description: "ตำแหน่งตัวอย่าง — เปลี่ยนเป็นร้านอาหารจริง"
+    },
+    {
+      day: 2, time: "13:30",
+      name: "ปราสาทเมืองต่ำ",
+      type: "attraction", lat: 14.4936, lng: 102.9825,
+      description: "ศาสนสถานขอมโบราณใกล้ปราสาทพนมรุ้ง"
+    },
+    {
+      day: 2, time: "13:30",
+      name: "บารายเมืองต่ำ",
+      type: "attraction", lat: 14.491, lng: 102.98,
+      description: "แหล่งน้ำโบราณของชุมชนเมืองต่ำ"
+    },
+    {
+      day: 2, time: "13:30",
+      name: "กุฏิฤาษี บ้านโคกเมือง",
+      type: "attraction", lat: 14.48, lng: 102.99,
+      description: "จุดตัวอย่าง — ยืนยันพิกัดกับผู้ประสานงานพื้นที่"
+    },
+    {
+      day: 2, time: "16:00",
+      name: "ออกเดินทางสู่เมืองพิมาย",
+      type: "transit", lat: 14.4936, lng: 102.9825,
+      description: "เดินทางกลับจังหวัดนครราชสีมา"
+    },
+    {
+      day: 2, time: "19:00",
+      name: "โรงแรมที่พัก — คืนที่ 2",
+      type: "hotel", lat: 15.22, lng: 102.49,
+      description: "ตำแหน่งตัวอย่าง — เปลี่ยนเป็นโรงแรมจริง"
+    },
+
+    // DAY 3 — พิมายและเดินทางกลับกรุงเทพฯ
+    {
+      day: 3, time: "07:00",
+      name: "อาหารเช้า — วันที่ 3",
+      type: "meal", lat: 15.22, lng: 102.49,
+      description: "รับประทานอาหารเช้าที่โรงแรม"
+    },
+    {
+      day: 3, time: "08:00",
+      name: "ออกเดินทางจากโรงแรม",
+      type: "transit", lat: 15.22, lng: 102.49,
+      description: "เดินทางไปปราสาทพิมาย"
+    },
+    {
+      day: 3, time: "09:00",
+      name: "อุทยานประวัติศาสตร์พิมาย",
+      type: "attraction", lat: 15.2231, lng: 102.4947,
+      description: "โบราณสถานขอมสำคัญของจังหวัดนครราชสีมา"
+    },
+    {
+      day: 3, time: "12:00",
+      name: "จุดรับประทานอาหารกลางวัน — พิมาย",
+      type: "meal", lat: 15.22, lng: 102.49,
+      description: "ตำแหน่งตัวอย่าง — เปลี่ยนเป็นร้านอาหารจริง"
+    },
+    {
+      day: 3, time: "14:30",
+      name: "ภาพเขียนสีเขาจันทร์งาม",
+      type: "attraction", lat: 14.86, lng: 101.88,
+      description: "แหล่งภาพเขียนสีโบราณในพื้นที่สีคิ้ว — ตรวจพิกัดอีกครั้ง"
+    },
+    {
+      day: 3, time: "16:00",
+      name: "ออกเดินทางกลับกรุงเทพฯ",
+      type: "transit", lat: 14.86, lng: 101.88,
+      description: "เดินทางกลับมหาวิทยาลัยศิลปากร วังท่าพระ"
+    },
+    {
+      day: 3, time: "19:00",
+      name: "มหาวิทยาลัยศิลปากร วังท่าพระ",
+      type: "finish", lat: 13.7516, lng: 100.4914,
+      description: "จุดสิ้นสุดการเดินทาง"
+    },
+
+    // โรงพยาบาล — ใช้เป็นจุดอ้างอิงฉุกเฉิน
+    {
+      day: "hospital", time: "ฉุกเฉิน",
+      name: "โรงพยาบาลมหาราชนครราชสีมา",
+      type: "hospital", lat: 14.99, lng: 102.1,
+      description: "โรงพยาบาลหลักในจังหวัดนครราชสีมา — ตรวจสอบพิกัดและเส้นทางก่อนใช้งาน"
+    },
+    {
+      day: "hospital", time: "ฉุกเฉิน",
+      name: "โรงพยาบาลบุรีรัมย์",
+      type: "hospital", lat: 14.995, lng: 103.103,
+      description: "โรงพยาบาลในจังหวัดบุรีรัมย์ — ตรวจสอบพิกัดก่อนใช้งาน"
+    },
+    {
+      day: "hospital", time: "ฉุกเฉิน",
+      name: "โรงพยาบาลพิมาย",
+      type: "hospital", lat: 15.22, lng: 102.5,
+      description: "โรงพยาบาลในอำเภอพิมาย — ตรวจสอบพิกัดก่อนใช้งาน"
+    }
+  ];
+
+  const styles = {
+    start:       { color: "#16a34a", icon: "S", label: "จุดเริ่มต้น" },
+    finish:      { color: "#dc2626", icon: "F", label: "จุดสิ้นสุด" },
+    attraction:  { color: "#3478db", icon: "•", label: "สถานที่ท่องเที่ยว" },
+    alternative: { color: "#9333ea", icon: "↔", label: "สถานที่ทางเลือก" },
+    meal:        { color: "#d97706", icon: "฿", label: "อาหาร" },
+    hotel:       { color: "#0891b2", icon: "H", label: "ที่พัก" },
+    transit:     { color: "#64748b", icon: "→", label: "จุดเดินทาง" },
+    hospital:    { color: "#e11d48", icon: "+", label: "โรงพยาบาล" }
+  };
+
+  const map = L.map("isan-map", {
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  const markers = [];
+  const markerByLocation = new Map();
+  const listElement = document.getElementById("isan-map-locations");
+  const titleElement = document.getElementById("isan-map-list-title");
+  const countElement = document.getElementById("isan-map-list-count");
+  const dayButtons = document.querySelectorAll(".isan-day-btn");
+
+  let selectedDay = "all";
+  let selectedLocation = null;
+
+  function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  function googleMapsUrl(location) {
+    return "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(`${location.lat},${location.lng}`);
+  }
+
+  function createMarker(location, index) {
+    const style = styles[location.type] || styles.attraction;
+
+    const icon = L.divIcon({
+      className: "",
+      html: `<div class="isan-pin" style="background:${style.color}">
+        <span>${style.icon === "•" ? index + 1 : style.icon}</span>
+      </div>`,
+      iconSize: [34, 34],
+      iconAnchor: [17, 32],
+      popupAnchor: [0, -30]
+    });
+
+    const marker = L.marker([location.lat, location.lng], { icon })
+      .bindPopup(`
+        <div class="isan-map-popup">
+          <strong>${escapeHTML(location.time)} · ${escapeHTML(location.name)}</strong>
+          <p>${escapeHTML(location.description)}</p>
+          <a href="${googleMapsUrl(location)}"
+             target="_blank" rel="noopener noreferrer">
+            เปิดใน Google Maps ↗
+          </a>
+        </div>
+      `);
+
+    marker.on("click", () => {
+      selectedLocation = location;
+      renderList();
+    });
+
+    marker.addTo(map);
+    markers.push({ location, marker });
+    markerByLocation.set(location, marker);
+  }
+
+  locations.forEach(createMarker);
+
+  function isVisible(location) {
+    if (selectedDay === "all") return true;
+    if (selectedDay === "hospital") return location.type === "hospital";
+    return String(location.day) === selectedDay;
+  }
+
+  function focusLocation(location) {
+    const marker = markerByLocation.get(location);
+    if (!marker) return;
+
+    map.flyTo([location.lat, location.lng], 13, { duration: 0.7 });
+    marker.openPopup();
+    selectedLocation = location;
+    renderList();
+  }
+
+  function renderList() {
+    const visibleLocations = locations.filter(isVisible);
+
+    titleElement.textContent =
+      selectedDay === "all" ? "สถานที่ทั้งหมด" :
+      selectedDay === "hospital" ? "โรงพยาบาล" : `สถานที่ DAY ${selectedDay}`;
+
+    countElement.textContent = `${visibleLocations.length} จุด`;
+
+    listElement.innerHTML = visibleLocations.map((location) => {
+      const style = styles[location.type] || styles.attraction;
+      const isSelected = selectedLocation === location;
+
+      return `
+        <button type="button"
+          class="isan-map-location ${isSelected ? "selected" : ""}"
+          data-location-index="${locations.indexOf(location)}">
+          <span class="isan-map-location-marker"
+            style="background:${style.color}">${style.icon}</span>
+          <span class="isan-map-location-content">
+            <span class="isan-map-location-top">
+              <span class="isan-map-location-time">${escapeHTML(location.time)}</span>
+              <span class="isan-map-location-type">${style.label}</span>
+            </span>
+            <span class="isan-map-location-name">${escapeHTML(location.name)}</span>
+            <span class="isan-map-location-desc">${escapeHTML(location.description)}</span>
+            <span class="isan-map-location-link">ดูบนแผนที่ ↗</span>
+          </span>
+        </button>
+      `;
+    }).join("");
+
+    listElement.querySelectorAll("[data-location-index]").forEach(button => {
+      button.addEventListener("click", () => {
+        const location = locations[Number(button.dataset.locationIndex)];
+        focusLocation(location);
+      });
+    });
+  }
+
+  function applyFilter(day) {
+    selectedDay = day;
+    selectedLocation = null;
+
+    dayButtons.forEach(button => {
+      const active = button.dataset.day === day;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+
+    markers.forEach(({ location, marker }) => {
+      if (isVisible(location)) {
+        if (!map.hasLayer(marker)) marker.addTo(map);
+      } else {
+        if (map.hasLayer(marker)) map.removeLayer(marker);
+      }
+    });
+
+    renderList();
+
+    const visible = markers.filter(({ location }) => isVisible(location));
+
+    if (visible.length) {
+      const bounds = L.latLngBounds(
+        visible.map(({ location }) => [location.lat, location.lng])
+      );
+      map.fitBounds(bounds, { padding: [35, 35], maxZoom: 12 });
+    }
+  }
+
+  dayButtons.forEach(button => {
+    button.addEventListener("click", () => applyFilter(button.dataset.day));
+  });
+
+  document.getElementById("isan-map-reset").addEventListener("click", () => {
+    applyFilter("all");
+  });
+
+  // เริ่มต้นด้วยภาพรวมทุกวัน
+  applyFilter("all");
+
+  // Leaflet ต้องคำนวณขนาดใหม่เมื่อ Section ถูกแสดง
+  setTimeout(() => map.invalidateSize(), 250);
+
+  // เผื่อเว็บมีปุ่มเปลี่ยนธีม ให้แผนที่ปรับขนาดหลังเปลี่ยนธีม
+  const section = document.getElementById("isan-map-section");
+  if (section) {
+    const observer = new ResizeObserver(() => map.invalidateSize());
+    observer.observe(section);
+  }
+})();
+</script>
 
 </body>
 </html>
