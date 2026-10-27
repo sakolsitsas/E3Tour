@@ -1624,6 +1624,492 @@ function showSecretHint(card) {
 </script>
 
 
+<!-- ISAN ROUTE SECTION -->
+<section id="isan-route" class="isan-route">
+  <header class="route-header">
+    <div>
+      <span class="route-eyebrow">VIASIAM · FIELD GUIDE</span>
+      <h2>Isan Route<span class="route-period">.</span></h2>
+      <p>เส้นทางทัศนศึกษา · 5–7 ธันวาคม 2569</p>
+    </div>
+    <span class="route-days-badge">3 DAYS · 2 PROVINCES</span>
+  </header>
+
+  <div class="route-day-tabs" role="group" aria-label="เลือกวันเดินทาง">
+    <button class="route-day active" data-day="0" type="button">
+      <span>DAY 01</span><strong>05 DEC</strong>
+    </button>
+    <button class="route-day" data-day="1" type="button">
+      <span>DAY 02</span><strong>06 DEC</strong>
+    </button>
+    <button class="route-day" data-day="2" type="button">
+      <span>DAY 03</span><strong>07 DEC</strong>
+    </button>
+  </div>
+
+  <div class="route-map-frame">
+    <div id="isan-route-map"></div>
+    <div class="route-map-label">
+      <span class="route-live-dot"></span>
+      <span id="route-map-caption">DAY 01 · NAKHON RATCHASIMA</span>
+    </div>
+  </div>
+
+  <div class="route-content">
+    <div class="route-timeline-heading">
+      <div>
+        <span class="route-eyebrow">YOUR JOURNEY</span>
+        <h3 id="route-day-title">Day 1 — เริ่มต้นการเดินทาง</h3>
+      </div>
+      <span id="route-stop-count" class="route-stop-count">2 STOPS</span>
+    </div>
+
+    <div id="route-timeline" class="route-timeline"></div>
+
+    <p class="route-disclaimer">
+      * จุดหมายและเส้นทางตัวอย่าง โปรดตรวจสอบกับกำหนดการเดินทางจริง
+    </p>
+  </div>
+</section>
+
+<link rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+.isan-route {
+  --route-forest: #203b30;
+  --route-gold: #c3a978;
+  --route-muted: #79847b;
+  --route-border: #e8e8df;
+  margin: 32px 0;
+  color: #25352c;
+  background: #fffefa;
+  border: 1px solid var(--route-border);
+  border-radius: 22px;
+  overflow: hidden;
+  font-family: inherit;
+}
+.route-header {
+  padding: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--route-forest);
+  color: #fffefa;
+}
+.route-eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: var(--route-gold);
+}
+.route-header h2 {
+  margin: 8px 0 5px;
+  font-size: clamp(32px, 5vw, 44px);
+  letter-spacing: -1.2px;
+  line-height: 1.15;
+}
+.route-period { color: var(--route-gold); }
+.route-header p {
+  margin: 0;
+  color: #d4ddd6;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.route-days-badge {
+  padding: 9px 12px;
+  border: 1px solid #637567;
+  border-radius: 8px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #e4d4ae;
+}
+.route-day-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--route-border);
+}
+.route-day {
+  padding: 12px;
+  border: 1px solid var(--route-border);
+  border-radius: 10px;
+  background: #fff;
+  color: #667268;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+.route-day span, .route-day strong { display: block; }
+.route-day span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+.route-day strong { font-size: 14px; }
+.route-day.active {
+  background: var(--route-forest);
+  border-color: var(--route-forest);
+  color: white;
+}
+.route-day.active span { color: var(--route-gold); }
+.route-map-frame {
+  margin: 0 22px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--route-border);
+}
+#isan-route-map {
+  height: 390px;
+  width: 100%;
+  background: #edf0e8;
+}
+.route-map-label {
+  position: absolute;
+  z-index: 500;
+  left: 12px;
+  bottom: 12px;
+  max-width: calc(100% - 24px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(255,254,250,.96);
+  color: var(--route-forest);
+  border: 1px solid #e6e6dc;
+  border-radius: 8px;
+  font-size: 10px;
+  letter-spacing: .7px;
+  font-weight: 800;
+}
+.route-live-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  background: #ba8e49;
+  border-radius: 50%;
+}
+.route-content { padding: 24px 28px 26px; }
+.route-timeline-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.route-timeline-heading h3 {
+  margin: 7px 0 0;
+  font-size: 20px;
+}
+.route-stop-count {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--route-muted);
+  white-space: nowrap;
+}
+.route-timeline {
+  position: relative;
+}
+.route-stop {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+  position: relative;
+  padding-bottom: 22px;
+}
+.route-stop:last-child { padding-bottom: 0; }
+.route-stop:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 25px;
+  bottom: 0;
+  width: 1px;
+  background: #d9dfd6;
+}
+.route-stop-number {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid #bdcbbd;
+  background: #f4f6f0;
+  color: var(--route-forest);
+  font-size: 10px;
+  font-weight: 800;
+  z-index: 1;
+}
+.route-stop h4 {
+  margin: 2px 0 5px;
+  font-size: 14px;
+}
+.route-stop p {
+  margin: 0;
+  color: var(--route-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.route-stop-link {
+  color: #597a64;
+  font-size: 11px;
+  text-decoration: none;
+  white-space: nowrap;
+  padding-top: 5px;
+}
+.route-stop-link:hover { text-decoration: underline; }
+.route-disclaimer {
+  border-top: 1px solid var(--route-border);
+  padding-top: 15px;
+  margin: 24px 0 0;
+  color: var(--route-muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+.route-pin {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #294b3b;
+  box-shadow: 0 2px 8px #0003;
+}
+.route-pin span {
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  transform: rotate(45deg);
+}
+.route-pin.route-pin-active { background: #ba8e49; }
+.route-popup-title { font-weight: 700; margin-bottom: 5px; }
+.route-popup-link { color: #326b50; font-weight: 600; }
+@media (max-width: 600px) {
+  .route-header { padding: 23px 19px; }
+  .route-days-badge { font-size: 9px; }
+  .route-day-tabs { padding: 13px; gap: 6px; }
+  .route-day { padding: 10px 8px; }
+  .route-day span { font-size: 9px; }
+  .route-day strong { font-size: 12px; }
+  .route-map-frame { margin: 0 13px; }
+  #isan-route-map { height: 320px; }
+  .route-content { padding: 22px 18px; }
+  .route-timeline-heading h3 { font-size: 17px; }
+  .route-stop { grid-template-columns: 28px minmax(0,1fr); }
+  .route-stop-link { grid-column: 2; padding-top: 0; }
+}
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById("isan-route");
+  const mapEl = document.getElementById("isan-route-map");
+  if (!root || !mapEl || !window.L || mapEl._leaflet_id) return;
+
+  /*
+   * ตัวอย่างสถานที่และพิกัดเท่านั้น
+   * แก้ให้ตรงกับกำหนดการจริงก่อนเผยแพร่
+   * พิกัดรูปแบบ [ละติจูด, ลองจิจูด]
+   */
+  const days = [
+    {
+      label: "DAY 01 · NAKHON RATCHASIMA",
+      title: "Day 1 — เริ่มต้นการเดินทาง",
+      stops: [
+        {
+          name: "ตัวอย่าง: จุดเริ่มต้นในโคราช",
+          detail: "แก้เป็นจุดนัดพบจริงของคณะ",
+          coords: [14.9799, 102.0977]
+        },
+        {
+          name: "ตัวอย่าง: อุทยานประวัติศาสตร์พิมาย",
+          detail: "แหล่งเรียนรู้ทางประวัติศาสตร์",
+          coords: [15.2231, 102.4945]
+        }
+      ]
+    },
+    {
+      label: "DAY 02 · ISAN EXPLORATION",
+      title: "Day 2 — สำรวจเส้นทางอีสาน",
+      stops: [
+        {
+          name: "ตัวอย่าง: อุทยานประวัติศาสตร์พิมาย",
+          detail: "แก้เป็นสถานที่ตามกำหนดการจริง",
+          coords: [15.2231, 102.4945]
+        },
+        {
+          name: "ตัวอย่าง: อุทยานประวัติศาสตร์พนมรุ้ง",
+          detail: "แหล่งเรียนรู้ทางประวัติศาสตร์",
+          coords: [14.5325, 102.9400]
+        }
+      ]
+    },
+    {
+      label: "DAY 03 · BURIRAM",
+      title: "Day 3 — วันสุดท้ายของทริป",
+      stops: [
+        {
+          name: "ตัวอย่าง: อุทยานประวัติศาสตร์พนมรุ้ง",
+          detail: "แก้เป็นจุดหมายของวันสุดท้าย",
+          coords: [14.5325, 102.9400]
+        },
+        {
+          name: "ตัวอย่าง: ตัวเมืองบุรีรัมย์",
+          detail: "แก้เป็นจุดสิ้นสุดหรือจุดส่งคณะ",
+          coords: [14.9950, 103.1020]
+        }
+      ]
+    }
+  ];
+
+  const map = L.map(mapEl, {
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer(
+    "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+  ).addTo(map);
+
+  let routeLine = null;
+  let markers = [];
+  let selectedDay = 0;
+
+  const tabs = root.querySelectorAll(".route-day");
+  const timeline = root.querySelector("#route-timeline");
+
+  function mapsLink(coords) {
+    return "https://www.google.com/maps/dir/?api=1&destination=" +
+      encodeURIComponent(coords[0] + "," + coords[1]);
+  }
+
+  function selectDay(index) {
+    selectedDay = index;
+    const day = days[index];
+
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle("active", i === index);
+      tab.setAttribute("aria-pressed", String(i === index));
+    });
+
+    root.querySelector("#route-map-caption").textContent = day.label;
+    root.querySelector("#route-day-title").textContent = day.title;
+    root.querySelector("#route-stop-count").textContent =
+      day.stops.length + " STOPS";
+
+    if (routeLine) map.removeLayer(routeLine);
+    markers.forEach(marker => map.removeLayer(marker));
+    markers = [];
+
+    const coords = day.stops.map(stop => stop.coords);
+
+    // เส้นตรงเชื่อมลำดับหมุดเพื่อสื่อเส้นทางโดยประมาณ
+    routeLine = L.polyline(coords, {
+      color: "#294b3b",
+      weight: 4,
+      opacity: 0.85,
+      dashArray: "7 8",
+      lineCap: "round"
+    }).addTo(map);
+
+    day.stops.forEach((stop, i) => {
+      const icon = L.divIcon({
+        className: "",
+        html:
+          '<div class="route-pin ' +
+          (i === 0 ? "route-pin-active" : "") +
+          '"><span>' + (i + 1) + '</span></div>',
+        iconSize: [28, 35],
+        iconAnchor: [14, 30],
+        popupAnchor: [0, -28]
+      });
+
+      const marker = L.marker(stop.coords, { icon }).addTo(map);
+
+      marker.bindPopup(
+        '<div class="route-popup-title">' + stop.name + '</div>' +
+        '<div>' + stop.detail + '</div>' +
+        '<p><a class="route-popup-link" target="_blank" rel="noopener noreferrer" href="' +
+        mapsLink(stop.coords) + '">นำทางด้วย Google Maps ↗</a></p>'
+      );
+
+      marker.on("click", () => highlightStop(i));
+      markers.push(marker);
+    });
+
+    timeline.replaceChildren();
+
+    day.stops.forEach((stop, i) => {
+      const row = document.createElement("div");
+      row.className = "route-stop";
+
+      const number = document.createElement("span");
+      number.className = "route-stop-number";
+      number.textContent = String(i + 1);
+
+      const info = document.createElement("div");
+      const title = document.createElement("h4");
+      title.textContent = stop.name;
+
+      const detail = document.createElement("p");
+      detail.textContent = stop.detail;
+      info.append(title, detail);
+
+      const link = document.createElement("a");
+      link.className = "route-stop-link";
+      link.href = mapsLink(stop.coords);
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "นำทาง ↗";
+
+      row.append(number, info, link);
+      row.addEventListener("click", event => {
+        if (event.target.closest("a")) return;
+        highlightStop(i);
+      });
+
+      timeline.appendChild(row);
+    });
+
+    if (coords.length === 1) {
+      map.setView(coords[0], 12);
+    } else {
+      map.fitBounds(L.latLngBounds(coords).pad(0.25), {
+        maxZoom: 11
+      });
+    }
+
+    setTimeout(() => map.invalidateSize(), 100);
+  }
+
+  function highlightStop(index) {
+    const stop = days[selectedDay].stops[index];
+    map.flyTo(stop.coords, 13, { duration: 0.5 });
+    markers[index].openPopup();
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectDay(index));
+  });
+
+  selectDay(0);
+})();
+</script>
+
 
 </main>
 
