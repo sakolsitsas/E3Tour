@@ -1734,6 +1734,79 @@ html {
 </section>
 
 
+<section id="isan-map-section" class="isan-map-section">
+  <div class="isan-map-header">
+    <div>
+      <span class="isan-map-eyebrow">ISAN FIELD TRIP · 2026</span>
+      <h2>แผนที่การเดินทาง</h2>
+      <p>สำรวจเส้นทางอารยธรรมอีสานใต้ 3 วัน 2 คืน</p>
+    </div>
+
+    <a
+      class="isan-emergency-link"
+      href="tel:1669"
+      aria-label="โทรเรียกรถพยาบาลฉุกเฉิน 1669"
+    >
+      <span>✚</span> ฉุกเฉิน 1669
+    </a>
+  </div>
+
+  <div class="isan-map-day-tabs" aria-label="เลือกวันเดินทาง">
+    <button type="button" class="isan-day-btn active" data-day="all">
+      ทั้งหมด
+    </button>
+    <button type="button" class="isan-day-btn" data-day="1">
+      DAY 1
+    </button>
+    <button type="button" class="isan-day-btn" data-day="2">
+      DAY 2
+    </button>
+    <button type="button" class="isan-day-btn" data-day="3">
+      DAY 3
+    </button>
+    <button type="button" class="isan-day-btn" data-day="hospital">
+      โรงพยาบาล
+    </button>
+  </div>
+
+  <div class="isan-map-legend">
+    <span><i class="legend-dot dot-attraction"></i> สถานที่ท่องเที่ยว</span>
+    <span><i class="legend-dot dot-start"></i> เริ่มต้น</span>
+    <span><i class="legend-dot dot-finish"></i> จุดพัก</span>
+    <span><i class="legend-dot dot-meal"></i> อาหาร</span>
+    <span><i class="legend-dot dot-hotel"></i> ที่พัก</span>
+    <span><i class="legend-dot dot-hospital"></i> โรงพยาบาล</span>
+  </div>
+
+  <div class="isan-map-layout">
+    <div class="isan-map-canvas-wrap">
+      <div id="isan-map" aria-label="แผนที่เส้นทางทริปอีสาน"></div>
+      <div class="isan-map-caption">
+        <span class="isan-map-live-dot"></span>
+        INTERACTIVE ROUTE MAP
+      </div>
+    </div>
+
+    <aside class="isan-map-sidebar">
+      <div class="isan-map-sidebar-head">
+        <div>
+          <h3 id="isan-map-list-title">สถานที่ทั้งหมด</h3>
+          <p id="isan-map-list-count">กำลังโหลดรายการ...</p>
+        </div>
+        <span class="isan-map-pin-icon">⌖</span>
+      </div>
+
+      <div id="isan-map-locations" class="isan-map-locations"></div>
+
+    </aside>
+  </div>
+
+  <div class="isan-map-footer">
+    <span>MAP DATA · OPENSTREETMAP</span>
+    <button type="button" id="isan-map-reset">แสดงทุกสถานที่ ↗</button>
+  </div>
+</section>
+
 
 
   <section class="panel" id="itineraryPanel">
@@ -1843,83 +1916,6 @@ html {
 </section>
 
 
-
-<section id="isan-map-section" class="isan-map-section">
-  <div class="isan-map-header">
-    <div>
-      <span class="isan-map-eyebrow">ISAN FIELD TRIP · 2026</span>
-      <h2>แผนที่การเดินทาง</h2>
-      <p>สำรวจเส้นทางอารยธรรมอีสานใต้ 3 วัน 2 คืน</p>
-    </div>
-
-    <a
-      class="isan-emergency-link"
-      href="tel:1669"
-      aria-label="โทรเรียกรถพยาบาลฉุกเฉิน 1669"
-    >
-      <span>✚</span> ฉุกเฉิน 1669
-    </a>
-  </div>
-
-  <div class="isan-map-day-tabs" aria-label="เลือกวันเดินทาง">
-    <button type="button" class="isan-day-btn active" data-day="all">
-      ทั้งหมด
-    </button>
-    <button type="button" class="isan-day-btn" data-day="1">
-      DAY 1
-    </button>
-    <button type="button" class="isan-day-btn" data-day="2">
-      DAY 2
-    </button>
-    <button type="button" class="isan-day-btn" data-day="3">
-      DAY 3
-    </button>
-    <button type="button" class="isan-day-btn" data-day="hospital">
-      โรงพยาบาล
-    </button>
-  </div>
-
-  <div class="isan-map-legend">
-    <span><i class="legend-dot dot-attraction"></i> สถานที่ท่องเที่ยว</span>
-    <span><i class="legend-dot dot-start"></i> เริ่มต้น</span>
-    <span><i class="legend-dot dot-finish"></i> สิ้นสุด</span>
-    <span><i class="legend-dot dot-meal"></i> อาหาร</span>
-    <span><i class="legend-dot dot-hotel"></i> ที่พัก</span>
-    <span><i class="legend-dot dot-hospital"></i> โรงพยาบาล</span>
-  </div>
-
-  <div class="isan-map-layout">
-    <div class="isan-map-canvas-wrap">
-      <div id="isan-map" aria-label="แผนที่เส้นทางทริปอีสาน"></div>
-      <div class="isan-map-caption">
-        <span class="isan-map-live-dot"></span>
-        INTERACTIVE ROUTE MAP
-      </div>
-    </div>
-
-    <aside class="isan-map-sidebar">
-      <div class="isan-map-sidebar-head">
-        <div>
-          <h3 id="isan-map-list-title">สถานที่ทั้งหมด</h3>
-          <p id="isan-map-list-count">กำลังโหลดรายการ...</p>
-        </div>
-        <span class="isan-map-pin-icon">⌖</span>
-      </div>
-
-      <div id="isan-map-locations" class="isan-map-locations"></div>
-
-      <p class="isan-map-note">
-        * จุดอาหารและโรงแรมบางจุดเป็นตำแหน่งตัวอย่าง
-        โปรดยืนยันสถานที่จริงก่อนเดินทาง
-      </p>
-    </aside>
-  </div>
-
-  <div class="isan-map-footer">
-    <span>MAP DATA · OPENSTREETMAP</span>
-    <button type="button" id="isan-map-reset">แสดงทุกสถานที่ ↗</button>
-  </div>
-</section>
 
 
 <!-- SECRET ACTIVITIES / COMING SOON -->
@@ -2632,12 +2628,6 @@ function renderTopLiked(data) {
       description: "แลนด์มาร์กสำคัญใจกลางเมืองโคราช"
     },
     {
-      day: 1, time: "17:00",
-      name: "ประตูชุมพล",
-      type: "attraction", lat: 14.975, lng: 102.096,
-      description: "ประตูเมืองเก่าของนครราชสีมา"
-    },
-    {
       day: 1, time: "19:00",
       name: "โรงแรมที่พัก — คืนที่ 1",
       type: "hotel", lat: 14.98, lng: 102.1,
@@ -2645,12 +2635,6 @@ function renderTopLiked(data) {
     },
 
     // DAY 2 — บุรีรัมย์
-    {
-      day: 2, time: "07:00",
-      name: "อาหารเช้า — วันที่ 2",
-      type: "meal", lat: 14.98, lng: 102.1,
-      description: "รับประทานอาหารเช้าที่โรงแรม"
-    },
     {
       day: 2, time: "08:00",
       name: "ออกเดินทางสู่จังหวัดบุรีรัมย์",
@@ -2701,12 +2685,6 @@ function renderTopLiked(data) {
     },
 
     // DAY 3 — พิมายและเดินทางกลับกรุงเทพฯ
-    {
-      day: 3, time: "07:00",
-      name: "อาหารเช้า — วันที่ 3",
-      type: "meal", lat: 15.22, lng: 102.49,
-      description: "รับประทานอาหารเช้าที่โรงแรม"
-    },
     {
       day: 3, time: "08:00",
       name: "ออกเดินทางจากโรงแรม",
